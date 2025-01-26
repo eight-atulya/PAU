@@ -1,3 +1,4 @@
+```markdown
 # PAU
 
 **Author**: Anurag Atulya  
@@ -102,3 +103,134 @@ PAU/
 │   └── psychology_integration.md  # Psychology and human behavior integration
 └── logs/                          # Log files (git-ignored)
     └── app.log                    # Application log file
+```
+
+---
+
+## Core Components
+
+### 1. **`app.py`**
+- **Main entry point** for the Flask application.  
+- Registers routes and serves HTML pages from the `public/` directory.  
+- **Default route** (`/`) loads `landing.html` to greet the user and store their name.  
+- **`/app`** serves `index.html` (the main interface).  
+- **`/playground`** serves a new experimental page.
+
+### 2. **`pau/routes/`**
+- Collection of **API endpoints** for Chatbot, Notes, Search, etc.
+- Includes new endpoints for **saving and retrieving user data** from `user_data.json` (if you’ve added them in a `landing_routes.py`).
+
+### 3. **Services (`pau/services/`)**
+- Encapsulates **core business logic** (e.g., AI engine, search, notes, user services).
+
+### 4. **Models (`pau/models/`)**
+- Database models for structured data.
+
+### 5. **Utilities (`pau/utils/`)**
+- Helper functions for logging, validation, date/time, etc.
+
+### 6. **Database (`database/`)**
+- **`user_data.json`** to store or retrieve user names for the landing page.  
+- **Schema** and **seed** files for migrations and sample data.
+
+### 7. **Tests (`tests/`)**
+- **Unit** and **integration** tests covering routes, services, and models.
+
+### 8. **Frontend (`public/`)**
+- **`landing.html`** (new greeting page).  
+- **`playground.html`** (new experimental page).  
+- **`index.html`** for the main PAU interface.  
+- **`css/`** for styling (including `landing.css` or `playground.css` for a retro vibe).  
+- **`js/`** for interactivity.
+
+### 9. **Documentation (`docs/`)**
+- In-depth references on architecture, APIs, contribution guidelines, and more.
+
+---
+
+## Setup Instructions
+
+### 1. **Prerequisites**
+- Python 3.8+  
+- Virtual environment tool (recommended)  
+- SQLite3 (for local database usage)
+
+### 2. **Installation**
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/PAU.git
+   cd PAU
+   ```
+2. **Create and activate** a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # For Windows: venv\Scripts\activate
+   ```
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### 3. **Initialize the Database**
+1. **Run schema** (assuming `database/pau.db` is your DB file):
+   ```bash
+   sqlite3 database/pau.db < database/schema.sql
+   ```
+2. (**Optional**) **Seed** the database:
+   ```bash
+   sqlite3 database/pau.db < database/seed_data.sql
+   ```
+
+### 4. **Run the Application**
+1. **Start** the Flask app:
+   ```bash
+   python app.py
+   ```
+2. **Open** your browser and navigate to:
+   - `http://127.0.0.1:5000/` → Lands on the new **Landing Page** with greeting & user name storage.
+   - `http://127.0.0.1:5000/app` → Loads the existing **main interface** (`index.html`).
+   - `http://127.0.0.1:5000/playground` → Loads the **Playground** page (currently experimental).
+
+---
+
+## Usage
+
+1. **Landing Page**  
+   - **Greets** the user in a retro style (if using `landing.css`).  
+   - **Stores** the user’s name in `database/user_data.json` via API endpoints.  
+   - Provides **buttons** to go to the main PAU app or the Playground.
+
+2. **Sync With PAU**  
+   - Redirects to `http://127.0.0.1:5000/app`, serving `index.html`.  
+   - Continue using the existing AI or upskilling functionality.
+
+3. **Playground**  
+   - A **placeholder** page (`playground.html`) for experimental features.  
+   - Currently contains dummy text, but you can extend it with new ideas.
+
+---
+
+## Future Development
+
+1. **AI Enhancements**  
+   - Add advanced context-aware reasoning, emotional simulation, and long-term memory capabilities.  
+
+2. **Further Frontend Development**  
+   - Migrate or expand the UI with a robust frontend framework (React, Vue, etc.).  
+   - Enhance the **Landing** and **Playground** pages with dynamic content and improved styles.
+
+3. **Social Media Platform Integration**  
+   - Allow shared progress tracking, user collaboration, and skill endorsements.
+
+4. **Extended Logging & Monitoring**  
+   - Real-time dashboards for user insights, performance metrics, and error tracking.
+
+5. **Plugin Ecosystem**  
+   - Build modular plugins for specialized AI tasks or third-party integrations.
+
+---
+
+**Let’s build PAU together and redefine personal upskilling!**
+```
+
