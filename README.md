@@ -1,39 +1,42 @@
 # PAU
 
-**Author**: Anurag Atulya 
-**PAU**: Personal Assistant for Upskilling 
+**Author**: Anurag Atulya  
+**PAU**: Personal Assistant for Upskilling  
 **Purpose**: Develop a scalable, extensible, and human-centric framework for building personal upskilling assistants powered by advanced AI and human psychology principles.
 
 ---
 
-## **Table of Contents**
+## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Project Goals](#project-goals)
-3. [Directory Structure](#directory-structure)
-4. [Core Components](#core-components)
-5. [Setup Instructions](#setup-instructions)
-6. [Future Development](#future-development)
+1. [Introduction](#introduction)  
+2. [Project Goals](#project-goals)  
+3. [Directory Structure](#directory-structure)  
+4. [Core Components](#core-components)  
+5. [Setup Instructions](#setup-instructions)  
+6. [Usage](#usage)  
+7. [Future Development](#future-development)
 
 ---
 
-## **Introduction**
+## Introduction
 
 **PAU** is an open-source framework designed to build personal upskilling assistants. It integrates AI features like memory, intuition, and emotion simulation with data logging and user interaction insights. The framework is modular, scalable, and built with long-term growth in mind, supporting both developers and end-users.
 
+Recent additions include a **Landing Page** at the root (`/`) that greets users, stores their names in a JSON file, and provides quick navigation to either **Sync With PAU** (the main application) or a **Playground** page for experimentation.
+
 ---
 
-## **Project Goals**
+## Project Goals
 
-1. **Open Framework**: A reusable base for developers to create personal assistants.
-2. **Human-Centric AI**: Integrate psychology-driven algorithms for realistic interactions.
-3. **Scalability**: Support modular growth and integration of new features like social media.
-4. **Transparency**: Log all activities for user monitoring and AI synchronization.
+1. **Open Framework**: A reusable base for developers to create personal assistants.  
+2. **Human-Centric AI**: Integrate psychology-driven algorithms for realistic interactions.  
+3. **Scalability**: Support modular growth and integration of new features like social media.  
+4. **Transparency**: Log all activities for user monitoring and AI synchronization.  
 5. **Extensibility**: Allow the addition of custom AI functions (e.g., memory, intuition).
 
 ---
 
-## **Directory Structure**
+## Directory Structure
 
 ```plaintext
 PAU/
@@ -73,16 +76,21 @@ PAU/
 ├── database/                      # Database and migrations
 │   ├── migrations/                # Migration scripts for the database
 │   ├── schema.sql                 # Initial database schema
-│   └── seed_data.sql              # Example seed data
+│   ├── seed_data.sql              # Example seed data
+│   └── user_data.json             # JSON file to store user information (e.g., name)
 ├── tests/                         # Unit and integration tests
 │   ├── __init__.py                # Initialize tests package
 │   ├── test_routes.py             # Tests for API routes
 │   ├── test_services.py           # Tests for service logic
 │   └── test_models.py             # Tests for database models
 ├── public/                        # Frontend static files
-│   ├── index.html                 # Main frontend interface
+│   ├── landing.html               # Landing page (greets user, stores user name)
+│   ├── playground.html            # Playground page for experimentation
+│   ├── index.html                 # Main frontend interface (Sync With PAU)
 │   ├── css/                       # CSS for styling
-│   │   └── styles.css
+│   │   ├── styles.css             # General or shared styles
+│   │   ├── landing.css            # Retro/terminal styles for landing page
+│   │   └── playground.css         # Styles for playground page
 │   ├── js/                        # JavaScript for interactivity
 │   │   └── scripts.js
 │   └── assets/                    # Static assets (images, icons, etc.)
@@ -94,123 +102,3 @@ PAU/
 │   └── psychology_integration.md  # Psychology and human behavior integration
 └── logs/                          # Log files (git-ignored)
     └── app.log                    # Application log file
-```
-
----
-
-## **Core Components**
-
-### **1. `app.py`**
-
-- Main entry point for the Flask application.
-- Registers routes and starts the server.
-
-### **2. `pau/config.py`**
-
-- Centralized configuration settings, including database and secret keys.
-
-### \*\*3. Routes (`pau/routes/`)
-
-- Modular API routes for different functionalities:
-  - **`chatbot_routes.py`**: Handles chatbot interactions.
-  - **`search_routes.py`**: Handles external search requests.
-  - **`notes_routes.py`**: Manages user notes.
-  - **`progress_routes.py`**: Tracks user progress.
-
-### \*\*4. Services (`pau/services/`)
-
-- Encapsulates core business logic:
-  - **`ai_engine.py`**: Processes chatbot messages and simulates memory, intuition, and emotions.
-  - **`search_service.py`**: Logic for performing external searches.
-  - **`notes_service.py`**: Handles CRUD operations for notes.
-  - **`progress_service.py`**: Tracks and logs user progress.
-
-### \*\*5. Models (`pau/models/`)
-
-- Defines database models for structured data storage.
-
-### \*\*6. Utilities (`pau/utils/`)
-
-- Helper functions, including logging and validation utilities.
-
-### \*\*7. Database (`database/`)
-
-- Contains schema definition and migration files for the SQLite database.
-
-### \*\*8. Frontend (`public/`)
-
-- Static files for the frontend, including `index.html`, CSS, and JavaScript.
-
-### \*\*9. Documentation (`docs/`)
-
-- Comprehensive project documentation for developers and contributors.
-
-### \*\*10. Tests (`tests/`)
-
-- Unit and integration tests to ensure code quality.
-
----
-
-## **Setup Instructions**
-
-### **1. Prerequisites**
-
-- Python 3.8+
-- Virtual environment tool (optional but recommended)
-- SQLite3 (for local database)
-
-### **2. Installation**
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/PAU.git
-   cd PAU
-   ```
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### **3. Initialize the Database**
-
-1. Run the schema script:
-   ```bash
-   sqlite3 database/pau.db < database/schema.sql
-   ```
-2. (Optional) Seed the database:
-   ```bash
-   sqlite3 database/pau.db < database/seed_data.sql
-   ```
-
-### **4. Run the Application**
-
-1. Start the Flask app:
-   ```bash
-   python app.py
-   ```
-2. Open your browser and navigate to:
-   - `http://127.0.0.1:5000/`
-
----
-
-## **Future Development**
-
-1. **AI Enhancements**:
-   - Add functions for context-aware reasoning, emotional simulation, and long-term memory.
-2. **Frontend Development**:
-   - Develop a React or Vue-based frontend for enhanced interactivity.
-3. **Social Media Platform**:
-   - Integrate social features for shared progress tracking and collaboration.
-4. **Logging and Monitoring**:
-   - Enhance logging with visual dashboards for real-time user insights.
-5. **Extensibility**:
-   - Build plugins for additional functionality (e.g., integrations with learning platforms).
-
----
-
-**Let’s build PAU together and redefine personal upskilling!**
