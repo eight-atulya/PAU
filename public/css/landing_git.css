@@ -1,0 +1,141 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling (somewhat GitHub-like background and font) */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, 
+                 "Apple Color Emoji", "Segoe UI Emoji";
+    background-color: #f6f8fa;
+    color: #24292e;
+}
+
+/* Header & Nav */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaecef;
+    padding: 1rem 2rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: #24292e;
+    font-weight: 600;
+}
+
+/* Navigation links */
+.nav a {
+    margin-left: 1rem;
+    color: #0366d6;
+    text-decoration: none;
+    font-weight: 500;
+}
+.nav a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    background: linear-gradient(135deg, #f0f3f6, #ffffff);
+    padding: 2rem;
+}
+
+.hero-text {
+    max-width: 600px;
+    text-align: center;
+}
+
+.hero-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #586069;
+}
+
+/* Form styling */
+.user-form {
+    display: inline-flex;
+}
+
+.user-form input[type="text"] {
+    border: 1px solid #d1d5da;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    width: 220px;
+}
+
+.user-form button {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.user-form button:hover {
+    background-color: #22863a;
+}
+
+/* Features Section */
+.features {
+    padding: 2rem;
+    text-align: center;
+}
+
+.features h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.features ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.features li {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.features button {
+    margin: 0 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #0366d6;
+    background-color: #0366d6;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.features button:hover {
+    background-color: #0353c6;
+}
+
+/* Footer */
+footer {
+    background-color: #f6f8fa;
+    border-top: 1px solid #eaecef;
+    text-align: center;
+    padding: 1rem;
+    color: #586069;
+    margin-top: 2rem;
+}

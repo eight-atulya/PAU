@@ -1,33 +1,44 @@
-# app.py
-
 import os
 from flask import Flask, send_from_directory
 from pau.routes import register_routes
 
-
 def create_app():
     app = Flask(__name__)
 
-    # -- Register your routes --
+    # Register your existing routes/blueprints
     register_routes(app)
 
-    # -- Serve the frontend --
+    # 1. Serve the landing page at '/'
     @app.route('/')
-    def serve_index():
-        # The 'public' folder is next to this file
-        return send_from_directory(os.path.join(os.path.dirname(__file__), 'public'), 'index.html')
+    def serve_landing():
+        return send_from_directory(
+            os.path.join(os.path.dirname(__file__), 'public'),
+            'landing.html'
+        )
 
+    # 2. Serve the main app (old "index.html") at '/app'
+    @app.route('/app')
+    def serve_index():
+        return send_from_directory(
+            os.path.join(os.path.dirname(__file__), 'public'),
+            'index.html'
+        )
+
+    # 3. Serve the new Playground at '/playground'
+    @app.route('/playground')
+    def serve_playground():
+        return send_from_directory(
+            os.path.join(os.path.dirname(__file__), 'public'),
+            'playground.html'
+        )
+
+    # 4. Catch-all route for any static file references (CSS, JS, images, etc.)
     @app.route('/<path:filename>')
     def serve_static(filename):
-        # Serve other static files (CSS, JS, images) from public/
         return send_from_directory(os.path.join(os.path.dirname(__file__), 'public'), filename)
 
     return app
 
-
 if __name__ == '__main__':
-    # Create the Flask application
     application = create_app()
-
-    # You can set host='0.0.0.0' to listen externally
     application.run(host='0.0.0.0', port=5000, debug=True)

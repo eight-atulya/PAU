@@ -1,0 +1,21 @@
+/* Example playground page styling */
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #fffbea;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #666;
+  }
+  
+  button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+  }
+  
