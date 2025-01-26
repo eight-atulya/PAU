@@ -1,6 +1,7 @@
-# PAU - Personal Assistant for Upskilling
+# PAU
 
-**Author**: Anurag Atulya  
+**Author**: Anurag Atulya 
+**PAU**: Personal Assistant for Upskilling
 **Purpose**: Develop a scalable, extensible, and human-centric framework for building personal upskilling assistants powered by advanced AI and human psychology principles.
 
 ---
