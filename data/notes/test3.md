@@ -1,0 +1,1 @@
+notes will be only saved if the name provides the extension ie .md

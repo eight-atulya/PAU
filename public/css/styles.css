@@ -1,0 +1,171 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  height: 100vh;
+  color: white;
+  background-color: black;
+}
+h1, h2, h3 {
+  font-family: 'Lucida Console', Monaco, monospace;
+  margin: 0;
+}
+a {
+  color: #39c5bb;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+button {
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+}
+
+/* Chatbot Section */
+.chatbot-section {
+  width: 40%;
+  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+  border-right: 2px solid #444;
+  display: flex;
+  flex-direction: column;
+}
+.chatbot-header {
+  background-color: #000000;
+  color: #39c5bb;
+  text-align: center;
+  padding: 15px;
+  font-size: 1.5em;
+  border-bottom: 2px solid #444;
+}
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-message {
+  margin: 5px 0;
+  font-size: 1em;
+}
+.user-message {
+  align-self: flex-end;
+  background-color: #39c5bb;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 60%;
+  white-space: pre-wrap;
+}
+.bot-message {
+  align-self: flex-start;
+  background-color: #444;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 60%;
+  white-space: pre-wrap;
+}
+.input-area {
+  padding: 15px;
+  border-top: 2px solid #444;
+  display: flex;
+  gap: 10px;
+}
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  background-color: #292929;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 5px;
+  outline: none;
+}
+.input-area button {
+  padding: 10px;
+  background-color: #39c5bb;
+  color: black;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Dynamic Section */
+.dynamic-section {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+.dynamic-header {
+  padding: 10px;
+  background-color: #000000;
+  border-bottom: 2px solid #444;
+  display: flex;
+  justify-content: space-between;
+}
+.toggle-buttons {
+  display: flex;
+  gap: 5px;
+}
+.toggle-buttons button {
+  padding: 10px;
+  background-color: #444;
+  color: white;
+  border: 1px solid #39c5bb;
+  border-radius: 5px;
+}
+.toggle-buttons button.active {
+  background-color: #39c5bb;
+  color: black;
+}
+.content-area {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+.search-section {
+  display: none;
+}
+.note-section {
+  display: none;
+  height: 100%;
+}
+.note-editor {
+  width: 100%;
+  height: 200px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1em;
+  background-color: #292929;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.progress-section {
+  display: none;
+  height: 100%;
+  color: white;
+}
+.progress-graph {
+  width: 100%;
+  height: 100%;
+  background: #292929;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+}
+.visible {
+  display: block !important;
+}
+/* Utility classes */
+.search-results .search-result-item {
+  margin-top: 10px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}

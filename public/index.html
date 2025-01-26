@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PAU - Personal Assistant for Upskilling</title>
+
+  <!-- Link to your separate CSS file -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Chatbot Section -->
+  <div class="chatbot-section">
+    <div class="chatbot-header">PAU Chatbot</div>
+    <div class="chat-area">
+      <!-- Example messages for demonstration -->
+      <div class="chat-message bot-message">
+        Hello! How can I assist you in your upskilling journey today?
+      </div>
+    </div>
+    <div class="input-area">
+      <input type="text" placeholder="Type your message here...">
+      <button>Send</button>
+    </div>
+  </div>
+
+  <!-- Dynamic Section -->
+  <div class="dynamic-section">
+    <div class="dynamic-header">
+      <div class="toggle-buttons">
+        <button data-section="search-section" class="active" onclick="toggleSection('search-section')">Browser</button>
+        <button data-section="note-section" onclick="toggleSection('note-section')">Notes</button>
+        <button data-section="progress-section" onclick="toggleSection('progress-section')">Progress</button>
+      </div>
+    </div>
+    <div class="content-area">
+      <!-- Search Section -->
+      <div id="search-section" class="search-section visible">
+        <input type="text" placeholder="Type your search query..." style="width: 100%; padding: 10px;">
+        <div class="search-results" style="margin-top: 10px;"></div>
+      </div>
+
+      <!-- Notes Section -->
+      <div id="note-section" class="note-section">
+        <textarea class="note-editor" placeholder="Write your notes here..."># Markdown Note
+
+Write your notes here with ease.</textarea>
+        <button>Save Note</button>
+        <button>Start New Note</button>
+        <button>Show All Notes</button>
+      </div>
+
+      <!-- Progress Section -->
+      <div id="progress-section" class="progress-section">
+        <div class="progress-graph">
+          <p>Progress graph or heatmap will appear here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to your separate JavaScript file, typically at the end of the body -->
+  <script src="js/scripts.js"></script>
+</body>
+</html>
