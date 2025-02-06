@@ -1,4 +1,4 @@
-```markdown
+
 # PAU
 
 **Author**: Anurag Atulya  
@@ -232,5 +232,4 @@ PAU/
 ---
 
 **Let’s build PAU together and redefine personal upskilling!**
-```
 

@@ -128,5 +128,35 @@
     "role": "assistant",
     "content": "Hello! It's nice to meet you. How can I assist you today?",
     "timestamp": 1737894293.903879
+  },
+  {
+    "role": "user",
+    "content": "hi",
+    "timestamp": 1738848960.7284477
+  },
+  {
+    "role": "assistant",
+    "content": "How can I assist you, my friend? Would you like to chat about something in particular or just enjoy a friendly conversation?",
+    "timestamp": 1738848960.7284477
+  },
+  {
+    "role": "user",
+    "content": "im anurag",
+    "timestamp": 1738848972.7822702
+  },
+  {
+    "role": "assistant",
+    "content": "Anurag! Nice to meet you. I'm an AI, and we're not really related in the classical sense, but I'll play along.\n\nSo, what's up? Want to chat about something specific or just shoot the breeze?",
+    "timestamp": 1738848972.7822702
+  },
+  {
+    "role": "user",
+    "content": "whats my name?",
+    "timestamp": 1738848990.1394432
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know your name. I'm a large language model, I don't have the ability to retain information about individual users or recall previous conversations. Each time you interact with me, it's a new conversation and I don't retain any context.\n\nThat being said, is there something specific you'd like to talk about or ask?",
+    "timestamp": 1738848990.1394432
   }
 ]
