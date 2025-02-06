@@ -203,3 +203,9 @@ button {
   padding: 10px;
   cursor: pointer;
 }
+
+.thinking-message {
+  font-style: italic;
+  opacity: 0.7;
+}
+

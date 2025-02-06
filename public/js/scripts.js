@@ -69,6 +69,13 @@ window.addEventListener('DOMContentLoaded', () => {
     addMessageToChat('user', userMessage);
     chatInput.value = '';
 
+    // 2) Insert "thinking..." bubble
+    const thinkingDiv = document.createElement('div');
+    thinkingDiv.className = 'chat-message bot-message thinking-message';
+    thinkingDiv.textContent = 'Thinking...';
+    chatArea.appendChild(thinkingDiv);
+    chatArea.scrollTop = chatArea.scrollHeight;    
+
     // Send to /api/chat
     try {
       const resp = await fetch('/api/chat', {
@@ -77,6 +84,9 @@ window.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ userMessage })
       });
       const data = await resp.json();
+
+      // 4) Remove "thinking..." bubble
+      chatArea.removeChild(thinkingDiv);
 
       if(data.botReply) {
         addMessageToChat('assistant', data.botReply);
