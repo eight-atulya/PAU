@@ -11,14 +11,23 @@
 <body>
   <!-- Chatbot Section -->
   <div class="chatbot-section">
-    <div class="chatbot-header">PAU</div>
-    <div class="chat-area">
-      <!-- Example messages for demonstration -->
-      <div class="chat-message bot-message">
-        Hello! How can I assist you in your upskilling journey today?
-      </div>
+    <div class="chatbot-header">
+      PAU - <span id="username-display">Guest</span>
     </div>
-    <div class="input-area">
+
+    <!-- NEW: Greeting container -->
+    <div class="chat-greeting" id="chat-greeting">
+      <p>Welcome back!</p>
+      <p>Would you like to recall your previous conversation?</p>
+      <button id="recallConversationBtn">Recall Conversation</button>
+      <button id="startFreshBtn">Start Fresh</button>
+    </div>
+
+    <!-- Existing chat elements -->
+    <div class="chat-area" id="chat-area" style="display: none;">
+      <!-- This can stay empty initially. We'll load or append messages in scripts.js -->
+    </div>
+    <div class="input-area" id="input-area" style="display: none;">
       <input type="text" placeholder="Type your message here...">
       <button>Send</button>
     </div>
@@ -61,7 +70,7 @@ Write your notes here with ease.</textarea>
 
   <!-- Link to your separate JavaScript file, typically at the end of the body -->
   <script src="js/scripts.js"></script>
+  <!-- Marked JS library -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
-
-

@@ -47,10 +47,22 @@ button {
   flex-direction: column;
   gap: 10px;
 }
-.chat-message {
-  margin: 5px 0;
-  font-size: 1em;
+/* Example styling for rendered Markdown content */
+.chat-message p {
+  margin: 0.5em 0;
 }
+
+.chat-message a {
+  color: #39c5bb;
+  text-decoration: underline;
+}
+
+.chat-message code {
+  background-color: rgba(255,255,255,0.1);
+  padding: 2px 4px;
+  font-family: monospace;
+}
+
 .user-message {
   align-self: flex-end;
   background-color: #39c5bb;
@@ -168,4 +180,26 @@ button {
   background-color: #333;
   padding: 10px;
   border-radius: 5px;
+}
+
+
+/* Greeting container */
+.chat-greeting {
+  padding: 15px;
+  border-bottom: 2px solid #444;
+  text-align: center;
+}
+
+.chat-greeting p {
+  margin: 10px 0;
+}
+
+.chat-greeting button {
+  margin: 5px;
+  background-color: #39c5bb;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
 }

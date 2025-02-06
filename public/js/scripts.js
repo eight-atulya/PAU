@@ -15,20 +15,59 @@ window.addEventListener('DOMContentLoaded', () => {
   // ---- Chat Logic ----
   const chatInput = document.querySelector('.input-area input');
   const chatSendBtn = document.querySelector('.input-area button');
-  const chatArea = document.querySelector('.chat-area');
+  const chatArea = document.getElementById('chat-area');
+  const greetingDiv = document.getElementById('chat-greeting');
+  const inputAreaDiv = document.getElementById('input-area');
+  const recallBtn = document.getElementById('recallConversationBtn');
+  const startFreshBtn = document.getElementById('startFreshBtn');
 
-  chatSendBtn.addEventListener('click', async () => {
+  // -- Step A: On load, show greeting, hide chat area --
+  chatArea.style.display = 'none';
+  inputAreaDiv.style.display = 'none';
+
+  // -- Step B: If user clicks "Recall Conversation" --
+  recallBtn.addEventListener('click', async () => {
+    greetingDiv.style.display = 'none';
+    chatArea.style.display = 'flex';
+    inputAreaDiv.style.display = 'flex';
+
+    try {
+      const resp = await fetch('/api/chat/history'); // <--- You need an endpoint that returns chat history
+      if (!resp.ok) throw new Error('Failed to fetch history');
+      const history = await resp.json();
+
+      // Append each message in the retrieved history
+      history.forEach(msg => {
+        addMessageToChat(msg.role, msg.content);
+      });
+    } catch (err) {
+      console.error('Error fetching chat history:', err);
+    }
+  });
+
+  // -- Step C: If user clicks "Start Fresh" --
+  startFreshBtn.addEventListener('click', () => {
+    greetingDiv.style.display = 'none';
+    chatArea.style.display = 'flex';
+    inputAreaDiv.style.display = 'flex';
+    // No old messages, so we leave chatArea empty
+  });
+
+  // -- Step D: Sending new messages to the server (unchanged, just refactor) --
+  chatSendBtn.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+
+  async function sendMessage() {
     const userMessage = chatInput.value.trim();
     if(!userMessage) return;
 
     // Display user message
-    const userDiv = document.createElement('div');
-    userDiv.className = 'chat-message user-message';
-    userDiv.textContent = userMessage;
-    chatArea.appendChild(userDiv);
-
-    // Scroll to bottom
-    chatArea.scrollTop = chatArea.scrollHeight;
+    addMessageToChat('user', userMessage);
+    chatInput.value = '';
 
     // Send to /api/chat
     try {
@@ -40,19 +79,28 @@ window.addEventListener('DOMContentLoaded', () => {
       const data = await resp.json();
 
       if(data.botReply) {
-        const botDiv = document.createElement('div');
-        botDiv.className = 'chat-message bot-message';
-        botDiv.textContent = data.botReply;
-        chatArea.appendChild(botDiv);
-        chatArea.scrollTop = chatArea.scrollHeight;
+        addMessageToChat('assistant', data.botReply);
       } else if(data.error) {
         alert('Error: ' + data.error);
       }
     } catch(e) {
       console.error('Chat error:', e);
     }
-    chatInput.value = '';
-  });
+  }
+
+  // -- Helper to add messages to chat area --
+  function addMessageToChat(role, content) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-message ${role === 'user' ? 'user-message' : 'bot-message'}`;
+  // NEW: parse markdown into HTML with marked
+  const renderedMarkdown = marked.parse(content);
+  msgDiv.innerHTML = renderedMarkdown;
+
+  chatArea.appendChild(msgDiv);
+
+  // Auto-scroll to bottom
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
 
   // ---- Search Logic ----
   const searchSection = document.getElementById('search-section');
@@ -254,3 +302,23 @@ window.addEventListener('DOMContentLoaded', () => {
         console.error("Error fetching user name:", error);
       }
     }
+
+
+
+// -- Preserving your existing user-name fetch logic --
+document.addEventListener("DOMContentLoaded", () => {
+  fetchUserName();
+});
+
+async function fetchUserName() {
+  try {
+    const response = await fetch("/api/get_user");
+    const data = await response.json();
+
+    if (data.name && data.name.trim() !== "") {
+      document.getElementById("username-display").textContent = data.name;
+    }
+  } catch (error) {
+    console.error("Error fetching user name:", error);
+  }
+}
