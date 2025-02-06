@@ -22,19 +22,27 @@ def api_chat():
 
     user_message = body["userMessage"]
 
-    # Load existing chat history (optional for multi-turn context)
+    # 1. Load the entire chat history
     chat_history = load_json(Config.CHAT_HISTORY_FILE, default_value=[])
 
+    # 2. Build the messages list with a system prompt + existing chat history
     messages = [
-        {"role": "system", "content": "You are Intelligent MI"},
-        {"role": "user", "content": user_message}
+        {"role": "system", "content": "You are Intelligent MI. Respond helpfully and politely."}
     ]
 
+    # Append any prior messages from the chat history
+    for entry in chat_history:
+        messages.append({"role": entry["role"], "content": entry["content"]})
+
+    # Finally, add the new user message
+    messages.append({"role": "user", "content": user_message})
+
     try:
+        # 3. Generate the new assistant response using the entire conversation as context
         data = generate_chat_response(messages)
         bot_reply = data["choices"][0]["message"]["content"]
 
-        # Persist chat in chatHistory.json
+        # 4. Persist the user and assistant messages in chatHistory.json
         now_timestamp = time.time()
         chat_history.append({
             "role": "user",
@@ -48,11 +56,22 @@ def api_chat():
         })
         save_json(Config.CHAT_HISTORY_FILE, chat_history)
 
-        # Update progress for chat usage
+        # 5. Update progress for chat usage
         increment_activity("chat")
 
         return jsonify({"botReply": bot_reply}), 200
 
     except Exception as e:
         print("[ERROR] /api/chat =>", e)
-        return jsonify({"error": "Failed to communicate with LM Studio"}), 500
+        return jsonify({"error": "Failed to communicate with LLM"}), 500
+
+
+# pau/routes/chatbot_routes.py
+
+@chatbot_bp.route("/api/chat/history", methods=["GET"])
+def get_chat_history():
+    """
+    Returns the existing chat history as JSON
+    """
+    chat_history = load_json(Config.CHAT_HISTORY_FILE, default_value=[])
+    return jsonify(chat_history), 200
