@@ -1,70 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PAU - Retro Landing</title>
-  <!-- Link your retro CSS -->
-  <link rel="stylesheet" href="/css/landing.css" />
+  <meta charset="UTF-8" />
+  <title>PAU - Landing</title>
+  <!-- Link to the landing-specific CSS -->
+  <link rel="stylesheet" href="css/landing.css" />
 </head>
 <body>
-  <h1 class="retro-title">Welcome to PAU</h1>
-  <p class="intro-text">This page greets you with an old-school terminal vibe. Enter your name and choose your path!</p>
+  <div class="container">
+    <!-- Left Section with the big circle -->
+    <div class="left-section">
+      <div class="big-circle"></div>
+    </div>
 
-  <div class="input-section">
-    <label for="username">Enter your name:</label>
-    <input type="text" id="username" placeholder="Type here..." />
-    <button id="saveNameBtn">Save Name</button>
+    <!-- Vertical divider -->
+    <div class="divider"></div>
+
+    <!-- Right Section with heading, text, and button -->
+    <div class="right-section">
+      <h1>PAU</h1>
+      <p>Over 1,00 proven ways implemented in Algorithm to make you more efficient!</p>
+      <button id="begin-btn">Let's begin!</button>
+    </div>
   </div>
 
-  <hr class="divider"/>
-
-  <div class="button-section">
-    <button onclick="window.location.href='/app'">Sync With PAU</button>
-    <button onclick="window.location.href='/playground'">Playground</button>
-  </div>
-
-  <div id="greeting" class="greeting"></div>
-
-  <script>
-    // Example fetch to load user data
-    async function loadUser() {
-      try {
-        const res = await fetch('/api/get_user');
-        const data = await res.json();
-        if (data.name) {
-          document.getElementById('greeting').textContent = `Hello, ${data.name}!`;
-        } else {
-          document.getElementById('greeting').textContent = 'No name found. Please enter your name.';
-        }
-      } catch (err) {
-        console.error('Failed to load user data', err);
-      }
-    }
-
-    // Save user data
-    async function saveUserName() {
-      const nameInput = document.getElementById('username');
-      const userName = nameInput.value.trim();
-      if (!userName) return;
-
-      try {
-        const res = await fetch('/api/set_user', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: userName })
-        });
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById('greeting').textContent = `Hello, ${data.name}!`;
-        }
-      } catch (err) {
-        console.error('Failed to save user data', err);
-      }
-    }
-
-    document.getElementById('saveNameBtn').addEventListener('click', saveUserName);
-
-    // Load user on page load
-    loadUser();
-  </script>
+  <!-- Include our landing-specific JS -->
+  <script src="js/landing.js"></script>
 </body>
 </html>

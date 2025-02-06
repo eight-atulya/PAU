@@ -163,5 +163,8 @@
     }
   },
   "active": "023eb77dd8f086fb",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "public/assets",
+    "public/js/landing.js"
+  ]
 }

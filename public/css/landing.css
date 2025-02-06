@@ -1,140 +1,82 @@
-/* -----------------------------
-   Retro Terminal-Style Landing
-   ----------------------------- */
+/* Basic reset or box-sizing rule (optional) */
+* {
+  box-sizing: border-box;
+}
 
-/* Optional: If you have a custom retro font, you can import it here:
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-*/
-
-/* Use a fallback chain: retro-styled font, else default monospace */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #000000;
-    color: #00ff00; /* Neon green */
-    font-family: 'Press Start 2P', Courier, monospace;
-    /* We'll center everything horizontally */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    min-height: 100vh;
-    position: relative;
-  }
-  
-  /* Optional scanning line effect overlay */
-  body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.02) 0px,
-      rgba(0, 0, 0, 0.02) 2px
-    );
-    opacity: 0.1; /* Adjust this to your taste */
-  }
-  
-  /* Title */
-  .retro-title {
-    margin-top: 40px;
-    font-size: 1.4rem; /* Press Start 2P is a small font, so bigger size helps */
-    text-align: center;
-    animation: flicker 2s infinite alternate;
-  }
-  
-  /* Intro text styling */
-  .intro-text {
-    max-width: 600px;
-    text-align: center;
-    line-height: 1.5;
-    margin: 10px 20px;
-  }
-  
-  /* Input & Button Container */
-  .input-section {
-    margin: 20px;
-  }
-  
-  label {
-    margin-right: 10px;
-  }
-  
-  input[type="text"] {
-    background-color: #111111;
-    border: 1px solid #00ff00;
-    color: #00ff00;
-    font-family: 'Press Start 2P', Courier, monospace;
-    padding: 5px 10px;
-    outline: none;
-    width: 200px;
-  }
-  
-  input[type="text"]::placeholder {
-    color: #008f00;
-  }
-  
-  button {
-    background-color: #000000;
-    color: #00ff00;
-    border: 1px solid #00ff00;
-    padding: 8px 16px;
-    font-family: 'Press Start 2P', Courier, monospace;
-    cursor: pointer;
-    text-transform: uppercase;
-    margin-left: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  /* Hover effect */
-  button:hover {
-    background-color: #00ff00;
-    color: #000000;
-    transform: scale(1.05);
-  }
-  
-  /* Divider line */
-  .divider {
-    width: 80%;
-    margin: 20px auto;
-    border: 0;
-    border-top: 1px dashed #00ff00;
-  }
-  
-  /* Second row of buttons */
-  .button-section {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  /* Greeting message */
-  .greeting {
-    margin-top: 10px;
-    font-size: 1rem;
-    text-align: center;
-  }
-  
-  /* Flicker Animation for Title */
-  @keyframes flicker {
-    0% {
-      opacity: 1;
-      text-shadow: 
-        0 0 2px #00ff00,
-        0 0 5px #00ff00,
-        0 0 10px #00ff00,
-        0 0 20px #00ff00,
-        0 0 40px #00ff00,
-        0 0 80px #00ff00;
-    }
-    100% {
-      opacity: 0.8;
-      text-shadow: none;
-    }
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; /* Light gray background, adjust to taste */
+}
+
+/* Container that holds the left and right sections side by side */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Left section containing the big circle */
+.left-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The circle itself */
+.big-circle {
+  width: 300px;
+  height: 300px;
+  background-color: #000000; /* Dark color for the circle */
+  border-radius: 50%;
+}
+
+/* Divider (vertical line) */
+.divider {
+  width: 4px;
+  background-color: #000000;
+}
+
+/* Right section with text and a button */
+.right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px; /* Some side padding */
+}
+
+/* Headline (PAU) */
+.right-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+/* Subtext / description */
+.right-section p {
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 360px; /* Keep text from being too wide */
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* The call-to-action button */
+#begin-btn {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  background-color: #39b54a; /* Green color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#begin-btn:hover {
+  background-color: #2e8f39; /* Darker green on hover */
+}

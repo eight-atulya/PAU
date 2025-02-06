@@ -9,3 +9,5 @@ __pycache__/
 *.db
 
 user_data.json
+
+.obsidian
