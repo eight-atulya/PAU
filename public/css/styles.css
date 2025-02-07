@@ -1,43 +1,43 @@
 /* General Styles */
 body {
   margin: 0;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: Arial, sans-serif;
   display: flex;
   height: 100vh;
-  color: white;
-  background-color: black;
+  color: #333;                /* Dark text */
+  background-color: #f0f0f0;  /* Light gray background */
 }
 h1, h2, h3 {
-  font-family: 'Lucida Console', Monaco, monospace;
+  font-family: Arial, sans-serif;
   margin: 0;
 }
 a {
-  color: #39c5bb;
+  color: #39b54a;
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
 }
 button {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: Arial, sans-serif;
   cursor: pointer;
 }
 
 /* Chatbot Section */
 .chatbot-section {
   width: 40%;
-  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
-  border-right: 2px solid #444;
+  background: #fff;             /* White background for the chat panel */
+  border-right: 2px solid #ccc; /* Subtle gray divider */
   display: flex;
   flex-direction: column;
 }
 .chatbot-header {
-  background-color: #000000;
-  color: #39c5bb;
+  background-color: #fff;
+  color: #333;
   text-align: center;
   padding: 15px;
   font-size: 1.5em;
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid #ccc;
 }
 .chat-area {
   flex: 1;
@@ -47,26 +47,26 @@ button {
   flex-direction: column;
   gap: 10px;
 }
-/* Example styling for rendered Markdown content */
+
+/* Markdown styling inside chat messages */
 .chat-message p {
   margin: 0.5em 0;
 }
-
 .chat-message a {
-  color: #39c5bb;
+  color: #39b54a;
   text-decoration: underline;
 }
-
 .chat-message code {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(0,0,0,0.05);
   padding: 2px 4px;
   font-family: monospace;
 }
 
+/* Chat message bubbles */
 .user-message {
   align-self: flex-end;
-  background-color: #39c5bb;
-  color: black;
+  background-color: #39b54a; /* Green accent */
+  color: #fff;
   padding: 10px;
   border-radius: 8px;
   max-width: 60%;
@@ -74,35 +74,46 @@ button {
 }
 .bot-message {
   align-self: flex-start;
-  background-color: #444;
-  color: white;
+  background-color: #e6e6e6; /* Light gray for bot responses */
+  color: #333;
   padding: 10px;
   border-radius: 8px;
   max-width: 60%;
   white-space: pre-wrap;
 }
+
+/* Input area below the chat */
 .input-area {
   padding: 15px;
-  border-top: 2px solid #444;
+  border-top: 2px solid #ccc;
   display: flex;
   gap: 10px;
 }
-.input-area input {
+.input-area textarea {
   flex: 1;
   padding: 10px;
   font-size: 1em;
-  background-color: #292929;
-  color: white;
-  border: 1px solid #444;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
+  resize: none;          /* Prevent manual drag-resizing if you prefer a fixed max height */
+  min-height: 40px;      /* The initial height */
+  max-height: 150px;     /* The maximum height before scrolling */
+  overflow-y: auto;      /* Vertical scroll if content exceeds max-height */
 }
+
 .input-area button {
   padding: 10px;
-  background-color: #39c5bb;
-  color: black;
+  background-color: #39b54a; /* Green accent for "Send" */
+  color: #fff;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
+}
+.input-area button:hover {
+  background-color: #2e8f39;  /* Darker green on hover */
 }
 
 /* Dynamic Section */
@@ -110,11 +121,12 @@ button {
   width: 60%;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
 }
 .dynamic-header {
   padding: 10px;
-  background-color: #000000;
-  border-bottom: 2px solid #444;
+  background-color: #fff;
+  border-bottom: 2px solid #ccc;
   display: flex;
   justify-content: space-between;
 }
@@ -124,19 +136,23 @@ button {
 }
 .toggle-buttons button {
   padding: 10px;
-  background-color: #444;
-  color: white;
-  border: 1px solid #39c5bb;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #39b54a;
   border-radius: 5px;
 }
+.toggle-buttons button:hover {
+  background-color: #e0ffe2; /* Subtle hover effect */
+}
 .toggle-buttons button.active {
-  background-color: #39c5bb;
-  color: black;
+  background-color: #39b54a;
+  color: #fff;
 }
 .content-area {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
+  background-color: #fff;
 }
 .search-section {
   display: none;
@@ -150,9 +166,9 @@ button {
   height: 200px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 1em;
-  background-color: #292929;
-  color: white;
-  border: 1px solid #444;
+  background-color: #f9f9f9;
+  color: #333;
+  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   outline: none;
@@ -161,51 +177,59 @@ button {
 .progress-section {
   display: none;
   height: 100%;
-  color: white;
+  color: #333;
 }
 .progress-graph {
   width: 100%;
   height: 100%;
-  background: #292929;
-  border: 1px solid #444;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
 }
 .visible {
   display: block !important;
 }
+
 /* Utility classes */
 .search-results .search-result-item {
   margin-top: 10px;
-  background-color: #333;
+  background-color: #e6e6e6;
   padding: 10px;
   border-radius: 5px;
 }
 
-
 /* Greeting container */
 .chat-greeting {
   padding: 15px;
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid #ccc;
   text-align: center;
+  background-color: #fff;
 }
-
 .chat-greeting p {
   margin: 10px 0;
 }
-
 .chat-greeting button {
   margin: 5px;
-  background-color: #39c5bb;
-  color: black;
+  background-color: #39b54a; /* Green accent for greeting buttons */
+  color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
 }
-
-.thinking-message {
-  font-style: italic;
-  opacity: 0.7;
+.chat-greeting button:hover {
+  background-color: #2e8f39;
 }
 
+/* "Thinking..." bubble style */
+.thinking-message {
+  font-style: italic;
+  opacity: 0.8;
+  background-color: #ffd; /* Light yellow background to stand out */
+  color: #333;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 60%;
+  align-self: flex-start;
+}

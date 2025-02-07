@@ -13,13 +13,22 @@ function toggleSection(section) {
 
 window.addEventListener('DOMContentLoaded', () => {
   // ---- Chat Logic ----
-  const chatInput = document.querySelector('.input-area input');
+  // Replace the query selector to find the <textarea> instead of <input>
+  const chatInput = document.querySelector('.input-area textarea');
   const chatSendBtn = document.querySelector('.input-area button');
   const chatArea = document.getElementById('chat-area');
   const greetingDiv = document.getElementById('chat-greeting');
   const inputAreaDiv = document.getElementById('input-area');
   const recallBtn = document.getElementById('recallConversationBtn');
   const startFreshBtn = document.getElementById('startFreshBtn');
+
+  // Auto-resize the textarea as the user types
+  chatInput.addEventListener('input', () => {
+    // Reset height to auto so scrollHeight is correctly calculated
+    chatInput.style.height = 'auto';
+    // Set height to its scrollHeight
+    chatInput.style.height = chatInput.scrollHeight + 'px';
+  });
 
   // -- Step A: On load, show greeting, hide chat area --
   chatArea.style.display = 'none';
@@ -32,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
     inputAreaDiv.style.display = 'flex';
 
     try {
-      const resp = await fetch('/api/chat/history'); // <--- You need an endpoint that returns chat history
+      const resp = await fetch('/api/chat/history');
       if (!resp.ok) throw new Error('Failed to fetch history');
       const history = await resp.json();
 
@@ -53,10 +62,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // No old messages, so we leave chatArea empty
   });
 
-  // -- Step D: Sending new messages to the server (unchanged, just refactor) --
+  // -- Step D: Sending new messages to the server --
   chatSendBtn.addEventListener('click', sendMessage);
-  chatInput.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
+
+  // Allow Enter (without Shift) to send the message; Shift+Enter inserts a newline
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Prevent a new line
       sendMessage();
     }
   });
@@ -67,14 +79,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Display user message
     addMessageToChat('user', userMessage);
-    chatInput.value = '';
 
-    // 2) Insert "thinking..." bubble
+    // Clear textarea and reset its height
+    chatInput.value = '';
+    chatInput.style.height = 'auto';
+
+    // Insert "thinking..." bubble
     const thinkingDiv = document.createElement('div');
     thinkingDiv.className = 'chat-message bot-message thinking-message';
     thinkingDiv.textContent = 'Thinking...';
     chatArea.appendChild(thinkingDiv);
-    chatArea.scrollTop = chatArea.scrollHeight;    
+    chatArea.scrollTop = chatArea.scrollHeight;
 
     // Send to /api/chat
     try {
@@ -85,7 +100,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
       const data = await resp.json();
 
-      // 4) Remove "thinking..." bubble
+      // Remove "thinking..." bubble
       chatArea.removeChild(thinkingDiv);
 
       if(data.botReply) {
@@ -95,6 +110,9 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     } catch(e) {
       console.error('Chat error:', e);
+      // Optionally remove thinking bubble or replace it with an error
+      chatArea.removeChild(thinkingDiv);
+      addMessageToChat('assistant', 'Something went wrong. Please try again.');
     }
   }
 
@@ -102,15 +120,15 @@ window.addEventListener('DOMContentLoaded', () => {
   function addMessageToChat(role, content) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `chat-message ${role === 'user' ? 'user-message' : 'bot-message'}`;
-  // NEW: parse markdown into HTML with marked
-  const renderedMarkdown = marked.parse(content);
-  msgDiv.innerHTML = renderedMarkdown;
 
-  chatArea.appendChild(msgDiv);
+    // Parse markdown into HTML with marked (assumes marked.js is loaded)
+    const renderedMarkdown = marked.parse(content);
+    msgDiv.innerHTML = renderedMarkdown;
 
-  // Auto-scroll to bottom
-  chatArea.scrollTop = chatArea.scrollHeight;
-}
+    chatArea.appendChild(msgDiv);
+    // Auto-scroll to bottom
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
 
   // ---- Search Logic ----
   const searchSection = document.getElementById('search-section');
@@ -294,28 +312,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-    // When the DOM is fully loaded, fetch the stored user name
-    document.addEventListener("DOMContentLoaded", () => {
-      fetchUserName();
-    });
-
-    async function fetchUserName() {
-      try {
-        const response = await fetch("/api/get_user");
-        const data = await response.json();
-        
-        // If name is found, display it in #username-display
-        if (data.name && data.name.trim() !== "") {
-          document.getElementById("username-display").textContent = data.name;
-        }
-      } catch (error) {
-        console.error("Error fetching user name:", error);
-      }
-    }
-
-
-
-// -- Preserving your existing user-name fetch logic --
+// When the DOM is fully loaded, fetch the stored user name
 document.addEventListener("DOMContentLoaded", () => {
   fetchUserName();
 });
