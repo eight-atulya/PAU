@@ -13,5 +13,15 @@
     "role": "assistant",
     "content": "Nice to meet you, Anurag! Congratulations on founding and leading the esteemed company Sytolab. I'd be happy to assist you in any way I can. As a valued partner, I want to ensure that my responses are not only helpful but also respectful and professional.\n\nMay I ask how I can better serve you today? Are there any specific questions or topics you'd like to discuss regarding your work at Sytolab?",
     "timestamp": 1738871824.6497111
+  },
+  {
+    "role": "user",
+    "content": "Hello, What is your name ?",
+    "timestamp": 1739200552.9971616
+  },
+  {
+    "role": "assistant",
+    "content": "Nice to meet you again, Anurag. My name is Intelligent MI. It's a pleasure to assist you and have this conversation with you. I strive to provide the most accurate and helpful responses while maintaining confidentiality and professionalism at all times. How may I be of assistance to you today?",
+    "timestamp": 1739200552.9971616
   }
 ]

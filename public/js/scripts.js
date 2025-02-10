@@ -312,20 +312,3 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// When the DOM is fully loaded, fetch the stored user name
-document.addEventListener("DOMContentLoaded", () => {
-  fetchUserName();
-});
-
-async function fetchUserName() {
-  try {
-    const response = await fetch("/api/get_user");
-    const data = await response.json();
-
-    if (data.name && data.name.trim() !== "") {
-      document.getElementById("username-display").textContent = data.name;
-    }
-  } catch (error) {
-    console.error("Error fetching user name:", error);
-  }
-}
