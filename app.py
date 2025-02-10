@@ -24,13 +24,6 @@ def create_app():
             'index.html'
         )
 
-    # 3. Serve the new Playground at '/playground'
-    @app.route('/playground')
-    def serve_playground():
-        return send_from_directory(
-            os.path.join(os.path.dirname(__file__), 'public'),
-            'playground.html'
-        )
 
     # 4. Catch-all route for any static file references (CSS, JS, images, etc.)
     @app.route('/<path:filename>')

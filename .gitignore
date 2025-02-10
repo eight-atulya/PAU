@@ -8,7 +8,5 @@ __pycache__/
 *.sqlite3
 *.db
 
-user_data.json
-
 .obsidian
 

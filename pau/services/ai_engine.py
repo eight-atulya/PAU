@@ -4,7 +4,7 @@ import requests
 from pau.config import Config
 
 
-def generate_chat_response(messages, model="llama-3.2-1b-instruct", temperature=0.7, stream=False):
+def generate_chat_response(messages, model="model-identifier", temperature=0.7, stream=False):
     """
     Call your local LM Studio API to get a response.
     """

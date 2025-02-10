@@ -1,0 +1,48 @@
+/* Masonry (Pinterest-like) layout using CSS columns */
+#boxes-container {
+    column-count: 4;      /* Number of columns — adjust as needed */
+    column-gap: 20px;     /* Spacing between columns */
+    max-width: 1200px;    /* Optional: limit container width */
+    margin: 20px auto;    /* Center the container */
+    padding: 0 10px;      /* Optional left/right padding */
+  }
+  
+  /* Each box behaves like a block that flows in a vertical column */
+  .text-box {
+    display: inline-block; /* important for multi-column layouts */
+    width: 100%;           /* fill the column width */
+    margin-bottom: 20px;   /* spacing below each box */
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box; /* ensures padding/border are included in total width */
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  
+    /* Subtle animation on load (fade+slide in) */
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  /* Hover effect: slight lift + drop shadow */
+  .text-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    border-color: #39b54a;
+  }
+  
+  /* Keyframes for a quick fade-in + upward motion */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
