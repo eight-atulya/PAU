@@ -21,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const inputAreaDiv = document.getElementById('input-area');
   const recallBtn = document.getElementById('recallConversationBtn');
   const startFreshBtn = document.getElementById('startFreshBtn');
+  
 
   // Auto-resize the textarea as the user types
   chatInput.addEventListener('input', () => {
@@ -132,51 +133,88 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ---- Search Logic ----
   const searchSection = document.getElementById('search-section');
-  const searchInput = searchSection.querySelector('input');
   const searchResultsDiv = searchSection.querySelector('.search-results');
-
-  // Press Enter to search
+  const searchInput = document.getElementById('searchQuery');
+  // const searchBtn = document.getElementById('searchBtn');
+  
   searchInput.addEventListener('keydown', async (e) => {
-    if(e.key === 'Enter') {
-      await performSearch();
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      await handleSearchClick();
+    }
+  });
+  
+  searchBtn.addEventListener('click', async () => {
+    await handleSearchClick();
+  });
+  
+  
+
+  async function performRAGSearch(query) {
+    const resp = await fetch('/api/search/rag', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+    const data = await resp.json();
+    if (data.results) {
+      // data.results is an array of { document, chunk_text, chunk_index, distance, document_link }
+      return data.results;
+    } else {
+      throw new Error(data.error || 'Search error');
+    }
+  }
+  
+
+  async function handleSearchClick() {
+    const query = document.getElementById('searchQuery').value;
+    console.log("Searching for query:", query);
+    try {
+      const results = await performRAGSearch(query);
+      console.log("Search API returned:", results);
+      displayResults(results);
+      if (results.length === 0) {
+        console.warn("No results found for query:", query);
+      }
+    } catch (err) {
+      console.error("Error in handleSearchClick:", err);
+    }
+  }
+  
+  function displayResults(results) {
+    const container = document.getElementById('searchResults');
+    container.innerHTML = '';
+    if (!results || results.length === 0) {
+      container.innerHTML = '<p>No results found.</p>';
+      return;
+    }
+    results.forEach(r => {
+      const div = document.createElement('div');
+      div.className = 'search-result-item';
+      div.innerHTML = `
+        <strong>Document:</strong> ${r.document} (chunk ${r.chunk_index})<br/>
+        <strong>Relevance:</strong> ${r.distance.toFixed(2)}<br/>
+        <strong>Text:</strong> ${r.chunk_text}<br/>
+        <a href="${r.document_link}" target="_blank">Open MD</a>
+      `;
+      container.appendChild(div);
+    });
+  }
+  
+
+  const searchBtn = document.getElementById('searchBtn');
+  searchBtn.addEventListener('click', async () => {
+    // the same logic:
+    const query = document.getElementById('searchQuery').value;
+    try {
+      const results = await performRAGSearch(query);
+      displayResults(results);
+    } catch (err) {
+      console.error(err);
     }
   });
 
-  async function performSearch() {
-    const query = searchInput.value.trim();
-    if(!query) return;
-    searchResultsDiv.innerHTML = 'Searching...';
-
-    try {
-      const resp = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-      const data = await resp.json();
-      if(data.results) {
-        // Render results
-        searchResultsDiv.innerHTML = '';
-        data.results.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'search-result-item';
-
-          const a = document.createElement('a');
-          a.href = item.url;
-          a.target = '_blank';
-          a.textContent = item.title || 'No Title';
-
-          const p = document.createElement('p');
-          p.textContent = item.content || 'No Description';
-
-          div.appendChild(a);
-          div.appendChild(p);
-          searchResultsDiv.appendChild(div);
-        });
-      } else if(data.error) {
-        searchResultsDiv.textContent = 'Error: ' + data.error;
-      }
-    } catch(err) {
-      console.error('Search error:', err);
-      searchResultsDiv.textContent = 'Search failed.';
-    }
-  }
+  
 
   // ---- Notes Logic ----
   const noteSection = document.getElementById('note-section');
@@ -311,4 +349,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+
 

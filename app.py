@@ -1,6 +1,11 @@
 import os
 from flask import Flask, send_from_directory
 from pau.routes import register_routes
+from pau.services.search_service import build_faiss_index
+
+
+build_faiss_index()
+
 
 def create_app():
     app = Flask(__name__)
