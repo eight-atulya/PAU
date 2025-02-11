@@ -2,6 +2,8 @@ import os
 from flask import Flask, send_from_directory
 from pau.routes import register_routes
 from pau.services.search_service import build_faiss_index
+import threading
+from pau.services.screen_capture import take_screenshots
 
 
 build_faiss_index()
@@ -36,6 +38,24 @@ def create_app():
         return send_from_directory(os.path.join(os.path.dirname(__file__), 'public'), filename)
 
     return app
+
+def start_digitalvision_service():
+    # Run the screenshot service in a background thread.
+    thread = threading.Thread(
+        target=take_screenshots,
+        kwargs={
+            "save_folder": "data/screen_snapshot",
+            "prefix": "DigitalVision",
+            "interval": 10,
+            "iterations": 0
+        },
+        daemon=True
+    )
+    thread.start()
+    print("DigitalVision service started.")
+
+# Start the service before running the Flask app
+start_digitalvision_service()
 
 if __name__ == '__main__':
     application = create_app()
