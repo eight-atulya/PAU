@@ -1,0 +1,15 @@
+venv/
+.env
+
+__pycache__/
+*.pyc
+*.pyo
+
+*.sqlite3
+*.db
+
+.obsidian
+
+*.jpeg
+*.jpg
+*.png
