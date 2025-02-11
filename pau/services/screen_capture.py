@@ -34,7 +34,7 @@ def take_screenshots(save_folder="data/screen_snapshot", prefix="DigitalVision",
                 filepath = os.path.join(save_folder, filename)
                 sct_img = sct.grab(monitor)
                 mss.tools.to_png(sct_img.rgb, sct_img.size, output=filepath)
-                print(f"[{timestamp}] Screenshot saved: {filepath}")
+                #print(f"[{timestamp}] Screenshot saved: {filepath}")
             time.sleep(interval)
             iteration += 1
 
