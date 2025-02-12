@@ -144,9 +144,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
   
-  searchBtn.addEventListener('click', async () => {
-    await handleSearchClick();
-  });
   
   
 
@@ -200,21 +197,6 @@ window.addEventListener('DOMContentLoaded', () => {
       container.appendChild(div);
     });
   }
-  
-
-  const searchBtn = document.getElementById('searchBtn');
-  searchBtn.addEventListener('click', async () => {
-    // the same logic:
-    const query = document.getElementById('searchQuery').value;
-    try {
-      const results = await performRAGSearch(query);
-      displayResults(results);
-    } catch (err) {
-      console.error(err);
-    }
-  });
-
-  
 
   // ---- Notes Logic ----
   const noteSection = document.getElementById('note-section');
