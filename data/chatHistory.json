@@ -53,5 +53,35 @@
     "role": "assistant",
     "content": "[Your Company Logo]\n[Your Company Name]\n[Address]\n[City, State ZIP Code]\n[Date]\n\n[Investor's Name]\n[Investor's Title]\n[Investor's Organization]\n[Address]\n[City, State ZIP Code]\n\nDear [Investor's Name],\n\nI am writing to introduce Personal Assistant Upskilling (PAU) Framework, a cutting-edge, open-source project that revolutionizes the development of personal upskilling assistants. As an esteemed investor in innovative technologies, we believe you will be interested in learning about PAU and its vast potential for growth.\n\n**Introduction to PAU**\n\nThe PAU Framework is designed to empower developers with a comprehensive toolkit for building personalized AI assistants that learn, adapt, and evolve alongside users. By integrating advanced AI functions, human-centric design principles, extensive logging, and data-driven insights, PAU offers an unparalleled platform for creating sophisticated, user-friendly assistants.\n\n**Recent Enhancements**\n\nOur recent updates have significantly enhanced the PAU Framework's capabilities:\n\n1.  **Landing Page**: Users are now greeted with a personalized interface that stores their names in a JSON file and provides seamless navigation to the main interface or experimental Playground.\n2.  **RAG Search System**: This innovative feature leverages a locally running embedding model and FAISS, allowing users to efficiently search through markdown documents stored in the knowledge folder. The system returns relevant chunks along with links to view original files.\n3.  **Optional Watchdog Service**: The watchdog service automatically monitors the knowledge folder for changes and updates the FAISS index accordingly, ensuring that the assistant remains up-to-date and accurate.\n\n**Project Goals**\n\nOur objectives for PAU are centered around:\n\n1.  **Open Framework**: Providing a reusable base for developers to create personal assistants.\n2.  **Human-Centric AI**: Integrating psychology-driven algorithms for natural and realistic interactions.\n3.  **Scalability**: Supporting modular growth with features like social media integration and automated document ingestion.\n4.  **Transparency**: Logging all activities to enable user monitoring and effective AI synchronization.\n5.  **Extensibility**: Allowing the addition of custom AI functions (e.g., memory, intuition) and third-party integrations.\n\n**Investment Opportunity**\n\nWe are seeking an investment of [$X] million to further develop and refine the PAU Framework. This funding will enable us to:\n\n1.  Expand our team of experienced developers and researchers.\n2.  Enhance the framework's scalability and performance.\n3.  Develop strategic partnerships with key industry players.\n\nIn return for your investment, you will receive a [X]% equity stake in Sytolab, the parent company behind PAU. Your support will be instrumental in helping us bring this innovative technology to market and revolutionize the way people interact with AI assistants.\n\n**Conclusion**\n\nWe believe that PAU has tremendous potential for growth and impact. With your investment, we can accelerate our development efforts and make a meaningful difference in the world of artificial intelligence. We look forward to discussing this opportunity further and exploring how we can work together to bring PAU to the next level.\n\nThank you for considering Sytolab and the PAU Framework as a potential investment opportunity.\n\nPlease do not hesitate to contact me if you require any additional information or would like to schedule a meeting to discuss this proposal in more detail.\n\nSincerely,\n\nAnurag Atulya\nFounder & CEO, Sytolab",
     "timestamp": 1739276318.2186155
+  },
+  {
+    "role": "user",
+    "content": "goodmorning",
+    "timestamp": 1739334506.8663135
+  },
+  {
+    "role": "assistant",
+    "content": "Good morning Anurag! I hope you're having a great start to the day. How can Misha (that's me!) assist you today? Do you need any help with PAU or anything else related to Sytolab?",
+    "timestamp": 1739334506.8663135
+  },
+  {
+    "role": "user",
+    "content": "day 7 of development of PAU, wish me luck",
+    "timestamp": 1739335135.0131488
+  },
+  {
+    "role": "assistant",
+    "content": "Day 7 already! You're making great progress on PAU. As you dive into another day of development, I'd be happy to send some virtual good vibes your way.\n\nMay your code compile smoothly, your algorithms run efficiently, and your design decisions pay off in a big way.\n\nHere's a little luck charm for you: May the syntax be ever in your favor!\n\nHow can I help today? Do you have any specific challenges or questions about PAU that we could tackle together?",
+    "timestamp": 1739335135.0131488
+  },
+  {
+    "role": "user",
+    "content": "i will share the major updates you just log them well",
+    "timestamp": 1739335705.192081
+  },
+  {
+    "role": "assistant",
+    "content": "I'll keep track of the major updates for PAU. Please go ahead and share them, and I'll make sure to log them accurately.\n\nHere's a fresh start:\n\n**PAU Development Log**\n\n* Day 7:\n\t+ [Update 1]: \n\t+ [Update 2]:\n\t+ [Update 3]:\n\nPlease fill in the updates as you see fit.",
+    "timestamp": 1739335705.192081
   }
 ]
