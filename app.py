@@ -4,9 +4,18 @@ from pau.routes import register_routes
 from pau.services.search_service import build_faiss_index
 import threading
 from pau.services.screen_capture import take_screenshots
+from pau.services.advanced_memory import init_advanced_memory, persist_advanced_memory
+from pau.services.advanced_memory import store_advanced_memory
+
+
+
+# call init to load existing data if any
+init_advanced_memory()
 
 
 build_faiss_index()
+
+
 
 
 def create_app():
@@ -38,6 +47,8 @@ def create_app():
         return send_from_directory(os.path.join(os.path.dirname(__file__), 'public'), filename)
 
     return app
+
+    
 
 def start_digitalvision_service():
     # Run the screenshot service in a background thread.

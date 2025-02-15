@@ -118,7 +118,7 @@ button {
 
 /* Dynamic Section */
 .dynamic-section {
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -232,4 +232,30 @@ button {
   padding: 10px;
   max-width: 60%;
   align-self: flex-start;
+}
+
+/* Button styling for "View Memory Graph" */
+#viewMemoryGraphBtn {
+  background-color: #1b4df1;  /* A nice green accent */
+  color: #fff;                 /* White text */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 8px;           /* Reduced padding from left and right */
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+  /* If you'd like a small box shadow or top margin */
+  margin-top: 10px;  
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Hover effect */
+#viewMemoryGraphBtn:hover {
+  background-color: #2e8f39;
+}
+
+/* Active click effect */
+#viewMemoryGraphBtn:active {
+  background-color: #246629;
+  box-shadow: none;
 }

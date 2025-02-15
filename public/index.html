@@ -45,7 +45,7 @@
     <div class="content-area">
       <!-- Search Section -->
       <div id="search-section" class="search-section visible">
-        <input id="searchQuery" type="text" placeholder="Type your search query..." style="width: 100%; padding: 10px;">
+        <input id="searchQuery" type="text" placeholder="Type your search query..." style=" padding: 10px;">
         <div id="searchResults" class="search-results" style="margin-top: 10px;"></div>
       </div>
 
@@ -68,6 +68,14 @@ Write your notes here with ease.</textarea>
     </div>
   </div>
 
+  
+
+<div> <!-- NEW: Modal container -->
+  <div class="right_pannel" id="right_pannel">
+    <button id="viewMemoryGraphBtn" onclick="window.location.href='/graph_inspector'">
+      View Memory Graph
+    </button>
+  </div>
   <!-- Link to your separate JavaScript file, typically at the end of the body -->
   <script src="js/scripts.js"></script>
   <!-- Marked JS library -->

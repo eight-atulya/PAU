@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Memory Graph Inspector</title>
+  <!-- Vis Network from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+    #controls {
+      padding: 10px;
+      background: #f0f0f0;
+    }
+    #graphContainer {
+      width: 100%;
+      height: calc(100vh - 50px); /* fill the screen minus header controls */
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button onclick="loadGraph()">Load Graph</button>
+    <span id="status" style="margin-left: 15px;"></span>
+  </div>
+
+  <div id="graphContainer"></div>
+
+  <script>
+    async function loadGraph() {
+      const statusEl = document.getElementById("status");
+      statusEl.textContent = "Loading graph...";
+
+      try {
+        // 1) Fetch the entire memory graph from your Flask route
+        const resp = await fetch("/api/memory/graph"); 
+        if (!resp.ok) {
+          throw new Error("Failed to fetch graph data");
+        }
+        const data = await resp.json();
+        statusEl.textContent = "Rendering graph...";
+
+        // 2) The data is in node-link format from NetworkX:
+        // {
+        //   "directed": <bool>,
+        //   "multigraph": <bool>,
+        //   "graph": {},
+        //   "nodes": [{ "id": "...", "content": "..." }, ...],
+        //   "links": [{ "source": "...", "target": "..." }, ...]
+        // }
+
+        // 3) Convert that to the format Vis.js expects: 
+        // an array of { id, label } and { from, to }.
+        const nodes = data.nodes.map(n => {
+          // If node has "content" attribute, show up to 50 chars; else show node.id
+          let text = n.content || n.id;
+          if (text.length > 50) {
+            text = text.slice(0, 50) + "..."; // truncate
+          }
+          return {
+            id: n.id,
+            label: text
+          };
+        });
+
+        const edges = data.links.map(link => ({
+          from: link.source,
+          to: link.target
+        }));
+
+        // 4) Create the network
+        const container = document.getElementById("graphContainer");
+        const visData = { nodes, edges };
+        const options = {
+          physics: { enabled: true },
+          interaction: { dragNodes: true }
+        };
+
+        new vis.Network(container, visData, options);
+
+        statusEl.textContent = "Graph loaded successfully.";
+      } catch (error) {
+        console.error("Error loading graph:", error);
+        statusEl.textContent = "Error loading graph. Check console.";
+      }
+    }
+  </script>
+</body>
+</html>
