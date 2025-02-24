@@ -2,7 +2,7 @@
 
 **Author**: Anurag Atulya  
 **PAU**: Personal Assistant for Upskilling  
-**Purpose**: Develop a scalable, extensible, and human-centric framework for building personal upskilling assistants powered by advanced AI and human psychology principles.
+**Purpose**: Develop a **scalable**, **extensible**, and **human-centric** framework for building personal upskilling assistants powered by **advanced AI** and **human psychology** principles.
 
 ---
 
@@ -14,260 +14,193 @@
 4. [Core Components](#core-components)  
 5. [Setup Instructions](#setup-instructions)  
 6. [Usage](#usage)  
-7. [New Features](#new-features)  
-8. [Future Development](#future-development)
+7. [Future Development](#future-development)  
+8. [Upcoming Next](#upcoming-next)
 
 ---
 
-## Introduction
+## 1. Introduction
 
-**PAU** is an open-source framework designed to build personal upskilling assistants. It integrates advanced AI functions—such as memory, intuition, and emotion simulation—with human-centric design principles, extensive logging, and data-driven user insights. The framework is modular, scalable, and designed for long-term growth, supporting both developers and end-users.
+**PAU** is an open-source framework designed to build personal **upskilling assistants**. It integrates AI features like **memory**, **intuitive reasoning**, **search**, and newly added **digital vision processing** (for OCR and screenshot capture). The framework is **modular**, **scalable**, and intended to support long-term growth, supporting both developers and end-users.
 
 Recent enhancements include:
-- A new **Landing Page** that greets users, stores their names in a JSON file, and provides navigation to the main interface or an experimental Playground.
-- A **RAG search system** powered by a locally running embedding model and FAISS. This system chunks and embeds markdown documents stored in the knowledge folder and returns the most relevant chunks along with links to view the original files.
-- An optional **watchdog** service that automatically monitors the knowledge folder for changes and updates the FAISS index accordingly.
+
+- **Landing Page** that greets users, stores their names in a JSON file, and navigates to either **Sync With PAU** or a **Playground**.  
+- **Advanced Memory** system with vector storage (FAISS or Chroma) plus a knowledge graph for storing relationships.  
+- **DigitalVision** pipeline for **screenshot capture**, with optional **OCR** and **local LLM** processing.  
 
 ---
 
-## Project Goals
+## 2. Project Goals
 
 1. **Open Framework**: Provide a reusable base for developers to create personal assistants.  
-2. **Human-Centric AI**: Integrate psychology-driven algorithms for natural and realistic interactions.  
-3. **Scalability**: Support modular growth with features like social media integration and automated document ingestion.  
-4. **Transparency**: Log all activities to enable user monitoring and effective AI synchronization.  
-5. **Extensibility**: Allow the addition of custom AI functions (e.g., memory, intuition) and third-party integrations.
+2. **Human-Centric AI**: Integrate psychology-driven algorithms for more natural interactions.  
+3. **Scalability**: Support modular growth (e.g., social media integration, digital vision).  
+4. **Transparency**: Log all activities for user monitoring and AI synchronization.  
+5. **Extensibility**: Allow the addition of custom AI functions (e.g., memory, intuition, vision).  
 
 ---
 
-## Directory Structure
+## 3. Directory Structure
+
+Below is a simplified overview. Adjust as your code grows:
 
 ```plaintext
 PAU/
-├── README.md                      # Comprehensive project documentation (this file)
-├── LICENSE                        # License for open-source use
-├── CONTRIBUTING.md                # Guidelines for contributing to the project
-├── app.py                         # Main entry point for the backend application
-├── requirements.txt               # Python dependencies (includes faiss-cpu and watchdog)
-├── .env                           # Environment variables for sensitive configs
-├── pau/                           # Main backend application package
-│   ├── __init__.py                # Initialize the application package
-│   ├── config.py                  # Configuration settings for the app
-│   ├── routes/                    # API routes (modular and extendable)
-│   │   ├── __init__.py            # Register API blueprints
-│   │   ├── chatbot_routes.py      # Chatbot-related API endpoints
-│   │   ├── search_routes.py       # Search-related API endpoints (includes RAG search)
-│   │   ├── notes_routes.py        # Notes-related API endpoints
-│   │   ├── progress_routes.py     # Progress tracking endpoints
-│   │   └── misc_routes.py         # Miscellaneous routes (e.g., serving markdown files)
-│   ├── services/                  # Core business logic and services
-│   │   ├── __init__.py            # Initialize services package
-│   │   ├── ai_engine.py           # AI functions (e.g., memory, intuition, emotion)
-│   │   ├── search_service.py      # Search-related logic (FAISS, embeddings, chunking)
-│   │   ├── notes_service.py       # Notes-related logic
-│   │   ├── progress_service.py    # Progress tracking logic
-│   │   └── user_service.py        # User management and personalization
-│   ├── models/                    # Database models
-│   │   ├── __init__.py            # Initialize models package
-│   │   ├── user.py                # User model
-│   │   ├── note.py                # Notes model
-│   │   ├── progress.py            # Progress model
-│   │   └── chatbot_session.py     # Chat session model
-│   └── utils/                     # Utility functions and helpers
-│       ├── __init__.py            # Initialize utils package
-│       ├── logging.py             # Centralized logging
-│       ├── validation.py          # Input validation utilities
-│       └── datetime_utils.py      # Date and time utilities
-├── database/                      # Database and document storage
-│   ├── migrations/                # Migration scripts for the database
-│   ├── schema.sql                 # Initial database schema
-│   ├── seed_data.sql              # Example seed data
-│   ├── user_data.json             # JSON file to store user information (e.g., name)
-│   ├── knowledge/                 # Markdown documents for search (RAG system)
-│   └── docs/                     # Alternative markdown documents for landing pages
-├── tests/                         # Unit and integration tests
-│   ├── __init__.py                # Initialize tests package
-│   ├── test_routes.py             # Tests for API routes
-│   ├── test_services.py           # Tests for service logic
-│   └── test_models.py             # Tests for database models
+├── app.py                          # Main entry point for the backend
+├── requirements.txt               # Python dependencies
+├── database/                      # Database, migrations, knowledge
+│   ├── knowledge/                 # Markdown documents for RAG search
+│   ├── screen_snapshot/           # Screenshots captured by DigitalVision
+│   └── processed_logs/            # OCR + LLM processed text files
+├── pau/
+│   ├── routes/                    # API routes
+│   │   ├── chatbot_routes.py      # Chatbot & memory routes
+│   │   ├── search_routes.py       # Search endpoints
+│   │   └── ...
+│   ├── services/                  # Core logic & services
+│   │   ├── advanced_memory.py     # Advanced memory (Chroma/FAISS + graph)
+│   │   ├── ai_engine.py           # LLM calls
+│   │   ├── digital_vision.py      # Screenshot capture + optional OCR pipeline
+│   │   └── ...
+│   └── utils/                     # Utilities (logging, validation, etc.)
 ├── public/                        # Frontend static files
-│   ├── landing.html               # Landing page (greets user, stores user name)
-│   ├── playground.html            # Playground page for experimentation
-│   ├── index.html                 # Main frontend interface (Sync With PAU)
-│   ├── css/                       # CSS for styling (includes landing.css, playground.css, styles.css)
-│   ├── js/                        # JavaScript for interactivity (e.g., scripts.js)
-│   └── assets/                    # Static assets (images, icons, etc.)
-├── docs/                          # Project documentation and tutorials
-│   ├── architecture.md            # Architecture design document
-│   ├── api_reference.md           # API reference documentation
-│   ├── how_to_contribute.md       # How to contribute guide
-│   ├── algorithms.md              # Details about AI algorithms used
-│   └── psychology_integration.md  # Psychology and human behavior integration
-└── logs/                          # Log files (git-ignored)
-    └── app.log                    # Application log file
+│   ├── index.html                 # Main UI
+│   ├── graph_inspector.html       # Visualizes memory graph with Vis.js
+│   └── ...
+└── docs/                          # Project documentation
 ```
 
 ---
 
-## Core Components
+## 4. Core Components
 
 ### 1. **`app.py`**
-- **Main entry point** for the Flask application.  
-- Registers API routes (chatbot, search, notes, progress, and miscellaneous endpoints for markdown files).  
-- Serves static files from the `public/` directory.
+- **Main** Flask application.  
+- Registers routes, sets up the server.  
+- Initializes advanced memory or any digital vision pipeline if needed.
 
 ### 2. **Routes (`pau/routes/`)**
-- Contains modular **API endpoints** for the chatbot, search (including a RAG-based search using FAISS), notes, progress, and miscellaneous endpoints (such as serving markdown files from different directories).
-- The new markdown-serving endpoints distinguish between knowledge documents (using `/api/md-knowledge/<filename>`) and landing docs (e.g., `/api/md-docs/<filename>`).
+- **Chatbot** (`chatbot_routes.py`):  
+  - Manages chat logic, memory storage, retrieving advanced memory, plus endpoints for memory reward/penalty.  
+  - Exposes `/api/chat` and `/api/memory/...`.
+- **Search** (`search_routes.py`):  
+  - Provides endpoints for RAG search or knowledge-based retrieval.
 
 ### 3. **Services (`pau/services/`)**
-- Implements the core **business logic**:
-  - **`ai_engine.py`** handles AI functions like memory, intuition, and emotion simulation.
-  - **`search_service.py`** now includes code for chunking, embedding via a local API, building a FAISS index, and performing a retrieval-augmented search.
-  - **Other services** handle notes, progress tracking, and user management.
+- **`advanced_memory.py`**:  
+  - Combines vector DB (FAISS/Chroma) with a knowledge graph (NetworkX) to store relationships.  
+  - Offers store/retrieve functions plus RL-based weighting.  
+- **`ai_engine.py`**:  
+  - Handles LLM calls (e.g., local llama model or remote endpoints).  
+- **`digital_vision.py`**:  
+  - Captures screenshots (with mss or custom approach).  
+  - (Optional) Runs OCR + LLM-based parsing pipeline.  
 
-### 4. **Models (`pau/models/`)**
-- Contains database models for users, notes, progress tracking, and chatbot sessions.
+### 4. **Database & Data Folders (`database/`)**
+- **`knowledge/`**:  
+  - Markdown docs used by RAG search.  
+- **`screen_snapshot/`**:  
+  - Where DigitalVision saves screenshots (e.g., `DigitalVision_monitor1_20250211_185544.png`).  
+- **`processed_logs/`**:  
+  - Where we store `.md` or `.json` files after OCR + LLM parse.
 
-### 5. **Utilities (`pau/utils/`)**
-- Provides helper functions (logging, input validation, date/time utilities) used across the project.
-
-### 6. **Database and Documents (`database/`)**
-- Stores migration scripts, the initial schema, seed data, and user data.
-- The **knowledge** folder contains markdown files that are automatically processed (chunked and embedded) for the FAISS search system.
-- The **docs** folder is used for alternative markdown content served on landing pages.
-
-### 7. **Tests (`tests/`)**
-- Unit and integration tests ensure that routes, services, and models work as expected.
-
-### 8. **Frontend (`public/`)**
-- Contains static HTML pages: **Landing**, **Main Interface (Sync With PAU)**, and **Playground**.
-- JavaScript files (e.g., `scripts.js`) handle UI interactivity, including the new search functionality.
-- CSS files style the UI (including retro/terminal styles in `landing.css`).
-
-### 9. **Documentation (`docs/`)**
-- Provides detailed references on architecture, API endpoints, contribution guidelines, AI algorithms, and the integration of psychology with AI.
+### 5. **Frontend (`public/`)**
+- **`index.html`**:  
+  - Main UI for chat and memory usage.  
+  - Contains a “View Memory Graph” button linking to `/graph_inspector`.  
+- **`graph_inspector.html`**:  
+  - Uses Vis.js to fetch `/api/memory/graph` and render the entire memory graph visually.
 
 ---
 
-## Setup Instructions
+## 5. Setup Instructions
 
 ### 1. **Prerequisites**
 - Python 3.8+  
-- A virtual environment tool (recommended)  
-- SQLite3 (for the local database)
+- Tesseract OCR (for optional OCR functionality)  
+- Local LLM (like `llama-3.2-1b-instruct`) if you plan to parse text locally.  
+- (Optional) Docker if you want container-based deployment.
 
 ### 2. **Installation**
+```bash
+git clone https://github.com/your-username/PAU.git
+cd PAU
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/PAU.git
-   cd PAU
-   ```
-2. **Create and activate** a virtual environment:
-   ```bash
-   python -m venv venv
-   # For Linux/macOS:
-   source venv/bin/activate
-   # For Windows:
-   venv\Scripts\activate
-   ```
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 3. **Configuration**
+- **Set** environment variables or `.env` for sensitive data if needed.  
+- **Check** `digital_vision.py` or `advanced_memory.py` for any custom endpoints or file paths.
 
-### 3. **Initialize the Database**
-1. **Run the schema** (assuming `database/pau.db` is your DB file):
-   ```bash
-   sqlite3 database/pau.db < database/schema.sql
-   ```
-2. (**Optional**) **Seed** the database:
-   ```bash
-   sqlite3 database/pau.db < database/seed_data.sql
-   ```
-
-### 4. **Build the FAISS Index (Optional)**
-- Run the index-building function to process all markdown files in `database/knowledge`:
-  ```python
-  from pau.services.search_service import build_faiss_index
-  build_faiss_index()
-  ```
-
-### 5. **(Optional) Start the Watchdog Service**
-- To automatically process new or modified markdown files, run the watchdog script:
-  ```bash
-  python watcher.py
-  ```
-
-### 6. **Run the Application**
-1. **Start** the Flask app:
-   ```bash
-   python app.py
-   ```
-2. **Open** your browser and navigate to:
-   - `http://127.0.0.1:5000/` → **Landing Page** (greeting and navigation).
-   - `http://127.0.0.1:5000/app` → **Main Interface** (Sync With PAU).
-   - `http://127.0.0.1:5000/playground` → **Playground** (experimental features).
+### 4. **Run the Application**
+```bash
+python app.py
+```
+Open `http://127.0.0.1:5000/` in your browser to see the main UI.
 
 ---
 
-## Usage
+## 6. Usage
 
-### Landing Page
-- **Greets** the user in a retro style and stores their name via API calls to update `database/user_data.json`.  
-- Provides navigation to the main PAU interface or experimental Playground.
+1. **Landing Page**  
+   - **Greets** the user, storing the user’s name.  
+   - Offers navigation to the main PAU or Playground.
 
-### Main Interface (Sync With PAU)
-- Loads the primary application features including the chatbot.
-- Enables chat functionality with context-aware memory and integration with AI functions.
+2. **Chat Interface**  
+   - **Type** messages in the left panel.  
+   - PAU **retrieves** relevant memory (from advanced_memory).  
+   - You see LLM-based responses on the right side.
 
-### Search Functionality (RAG Search)
-- **RAG Search System**:  
-  Processes markdown documents in `database/knowledge` by chunking, embedding via a locally running model, and indexing with FAISS.
-- When a user submits a search query, the system returns the most relevant chunks along with a link (e.g., `/api/md-knowledge/about.md`) to view the original file.
+3. **View Memory Graph**  
+   - Click “View Memory Graph” in the main UI.  
+   - Loads `graph_inspector.html`, fetches `/api/memory/graph`, and displays an interactive node-link diagram of all stored memories and relationships (persons, places, etc.).
 
-### Playground
-- A space for experimental features and new ideas that can be iterated on quickly.
-
----
-
-## New Features
-
-1. **FAISS-based RAG Search**:  
-   - Processes markdown documents from the knowledge folder.  
-   - Embeds text using a local embedding API.  
-   - Indexes chunks with FAISS and returns the most relevant results along with document links.
-
-2. **Watchdog Integration (Optional)**:  
-   - Uses the watchdog library to monitor `database/knowledge` for new or modified markdown files.  
-   - Automatically rebuilds the FAISS index when changes are detected.
-
-3. **Enhanced Markdown Serving Endpoints**:  
-   - Distinct endpoints (e.g., `/api/md-knowledge/<filename>`) serve markdown files from the knowledge folder.  
-   - Ensures that search result links correctly open the original markdown documents.
+4. **Digital Vision** (Optional)  
+   - If configured, a **background** or manual pipeline captures screenshots in `data/screen_snapshot/`.  
+   - You can run OCR + local LLM parse to store structured text in `data/processed_logs/`.
 
 ---
 
-## Future Development
+## 7. Future Development
 
-1. **Advanced AI Enhancements**  
-   - Improve context-aware reasoning, emotional simulation, and long-term memory management.
-
+1. **AI Enhancements**  
+   - Improved context-aware reasoning, emotional simulation, long-term memory management.  
 2. **Further Frontend Development**  
-   - Migrate or extend the UI using modern frontend frameworks (e.g., React or Vue) for improved interactivity.
-
+   - Migrate or expand UI with a modern frontend framework (React, Vue, etc.).  
 3. **Social Media Integration**  
-   - Incorporate social features such as shared progress tracking and user collaboration.
-
+   - Potential for shared progress tracking or user collaboration.  
 4. **Extended Logging & Monitoring**  
-   - Develop real-time dashboards for performance metrics, error tracking, and user insights.
-
+   - Real-time dashboards for performance metrics, error tracking, user insights.  
 5. **Plugin Ecosystem**  
-   - Allow third-party modules and custom AI plugins to extend PAU’s functionality.
+   - Third-party modules for specialized AI tasks or advanced knowledge retrieval.
+
+---
+
+## 8. Upcoming Next
+
+Here are **four** major features planned for the near future:
+
+1. **Digital Vision Processing**  
+   - We’ll refine the existing screenshot pipeline to include **OCR** and possibly advanced **vision models** (object detection, classification).  
+   - The pipeline will store recognized text (or objects) in an **advanced memory** store for easy retrieval.
+
+2. **Searching Memory from Digital Vision**  
+   - A new **search function** that specifically queries the memory derived from screenshots or images.  
+   - For instance, you could type “Show me all screenshots that mentioned ‘deadline’ last week” and get relevant images plus extracted text.
+
+3. **Skill Testing in Various Fields**  
+   - Introduce an **interactive quiz** or test mode.  
+   - The system can ask daily questions in different domains (coding, math, language), track your performance, and provide feedback or progress charts.
+
+4. **LLM-Based Intuitive Evaluation**  
+   - On a **daily** or scheduled basis, PAU will evaluate user skills using an **LLM** to gauge strengths/weaknesses.  
+   - The system can automatically suggest areas to improve, generate specialized exercises, or highlight user’s best fields.
+
+Stay tuned for these expansions, as they will make PAU a truly holistic personal upskilling assistant—combining **digital vision** capabilities, advanced memory, skill testing, and daily LLM-driven introspection.
 
 ---
 
 **Let’s build PAU together and redefine personal upskilling!**
-
----

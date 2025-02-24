@@ -6,6 +6,15 @@ import threading
 from pau.services.screen_capture import take_screenshots
 from pau.services.advanced_memory import init_advanced_memory, persist_advanced_memory
 from pau.services.advanced_memory import store_advanced_memory
+from pau.services.ocr_llm_pipeline import pipeline_ocr_and_llm
+
+from pau.services.ocr_llm_pipeline import process_image_directory
+
+process_image_directory(
+    directory_path="data/screen_snapshot",
+    processed_log="data/processed_images.json",
+    model="llama-3.2-1b-instruct"
+)
 
 
 
@@ -14,6 +23,8 @@ init_advanced_memory()
 
 
 build_faiss_index()
+
+
 
 
 
