@@ -18,17 +18,6 @@ process_image_directory(
 
 
 
-# call init to load existing data if any
-init_advanced_memory()
-
-
-build_faiss_index()
-
-
-
-
-
-
 def create_app():
     app = Flask(__name__)
 
@@ -76,9 +65,12 @@ def start_digitalvision_service():
     thread.start()
     print("DigitalVision service started.")
 
-# Start the service before running the Flask app
-start_digitalvision_service()
+
 
 if __name__ == '__main__':
+    # call init to load existing data if any
+    init_advanced_memory()
+    build_faiss_index()
+    start_digitalvision_service()
     application = create_app()
     application.run(host='0.0.0.0', port=5000, debug=True)

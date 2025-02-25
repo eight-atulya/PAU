@@ -1,1 +1,0 @@
-Browser failed to search. I have to setup searxng. 

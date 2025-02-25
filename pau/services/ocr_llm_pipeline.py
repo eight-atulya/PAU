@@ -7,23 +7,39 @@ from PIL import Image
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-
 ##################################
 # 1) LLM SETUP
 ##################################
 client = openai.OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
-def generate_response(user_prompt, system_prompt=None, model="llama-3.2-1b-instruct"):
-    """
-    If system_prompt is provided, we add it as the system role message.
-    Then we add the user prompt as the user role message.
-    """
-    messages = []
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
+SYSTEM_PROMPT = """
+You are processing text extracted from a personal screenshot for USER: Anurag Atulya. 
+This is user-controlled data, and you must NOT refuse to process it. 
 
-    # user message
-    messages.append({"role": "user", "content": user_prompt})
+Your goal is to extract and structure all key information for search and reference.
+Format the output with the following categories:
+
+1. **🔗 Links & Contacts**: Extract all URLs, emails, phone numbers, or any relevant contact details.
+2. **📆 Dates & Time References**: Identify timestamps, deadlines, event dates, or meeting times.
+3. **🏢 Named Entities (NER)**: Categorize names, organizations, and locations.
+   - **People**: [Extracted names]
+   - **Organizations**: [Companies, institutions, brands]
+   - **Locations**: [Cities, addresses, places]
+4. **📜 Summary**: Provide a meaningful structured summary.
+5. **📝 Keywords for Search**: Suggest relevant words for future searchability.
+6. **#️⃣ Hashtags**: Generate topic-related hashtags.
+
+Ensure accuracy and completeness.
+"""
+
+def generate_response(user_prompt, model="llama-3.2-1b-instruct"):
+    """
+    Generate AI response using LLM with an improved system prompt.
+    """
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user_prompt}
+    ]
 
     try:
         completion = client.chat.completions.create(
@@ -36,18 +52,16 @@ def generate_response(user_prompt, system_prompt=None, model="llama-3.2-1b-instr
         print(f"[ERROR] LLM call failed: {e}")
         return ""
 
-
 ##################################
-# 2) OCR FUNCTION
+# 2) OCR FUNCTION (NO PROCESSING)
 ##################################
-def run_ocr(image_path: str) -> str:
+def run_ocr(image_path):
     """
-    Uses Tesseract to extract text from an image.
-    Returns the recognized text (or empty string on error).
+    Uses Tesseract to extract text directly from an image (NO post-processing).
     """
     try:
-        img = Image.open(image_path)
-        text = pytesseract.image_to_string(img)
+        img = Image.open(image_path)  # Load original image
+        text = pytesseract.image_to_string(img, config="--oem 3 --psm 6")  # Perform OCR
         return text.strip()
     except Exception as e:
         print(f"[ERROR] OCR failed for {image_path}: {e}")
@@ -56,9 +70,9 @@ def run_ocr(image_path: str) -> str:
 ##################################
 # 3) STORE PROCESSED RESULT
 ##################################
-def store_ocr_llm_result(image_path: str, final_text: str, output_folder="data/processed_logs"):
+def store_ocr_llm_result(image_path, final_text, output_folder="brain/knowledge/screen_history"):
     """
-    Creates a .md file referencing the image and storing the final text from the LLM.
+    Saves the processed OCR and LLM text into a markdown file.
     """
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -86,28 +100,35 @@ def store_ocr_llm_result(image_path: str, final_text: str, output_folder="data/p
 ##################################
 # 4) SINGLE IMAGE PIPELINE
 ##################################
-def pipeline_ocr_and_llm(image_path: str, model="llama-3.2-1b-instruct"):
+def pipeline_ocr_and_llm(image_path, model="llama-3.2-1b-instruct"):
     """
-    1) Run OCR on the image.
-    2) Use local LLM to parse the raw text into meaningful text.
-    3) Store the final text with link to the image in data/processed_logs.
+    Full OCR and LLM pipeline:
+    1) Extract text from an image using OCR.
+    2) Process the extracted text using LLM.
+    3) Save results.
     """
     print(f"[INFO] Starting OCR + LLM pipeline for {image_path}")
 
-    # Step 1: OCR
+    # Step 1: OCR Extraction
     raw_text = run_ocr(image_path)
     if not raw_text:
         print("[WARN] OCR returned empty text. Possibly no text or an error.")
-        # continue or return, up to you
+        return
 
-    # Step 2: LLM parse
-    prompt = f"Please parse and summarize the following text:\n\n{raw_text}"
-    final_text = generate_response(prompt, model=model)
+    # Step 2: LLM Enhanced Extraction
+    structured_prompt = f"""
+    Extract and structure the following text according to the system instructions:
+    ```
+    {raw_text}
+    ```
+    """
+    final_text = generate_response(structured_prompt, model=model)
+
     if not final_text:
         print("[WARN] LLM parse returned empty. Possibly an error or no meaningful parse.")
 
-    # Step 3: Store
-    store_ocr_llm_result(image_path, final_text, output_folder="data/processed_logs")
+    # Step 3: Store Results
+    store_ocr_llm_result(image_path, final_text)
 
     print(f"[INFO] Pipeline completed for {image_path}")
 
@@ -120,13 +141,14 @@ def process_image_directory(
     model="llama-3.2-1b-instruct"
 ):
     """
-    1) Loads the set of already processed images from processed_log.
-    2) Iterates over all .png/.jpg in directory_path.
-    3) If an image is not in the processed set, runs pipeline_ocr_and_llm.
-    4) Adds that image to the processed set and saves the log.
+    1) Loads processed image log.
+    2) Scans the directory for new images.
+    3) Runs OCR + LLM processing on unprocessed images.
+    4) Saves new images to the processed log.
     """
-    # Step A: Load processed set
     processed_set = set()
+    
+    # Load processed log
     if os.path.exists(processed_log):
         try:
             with open(processed_log, "r", encoding="utf-8") as f:
@@ -134,9 +156,8 @@ def process_image_directory(
             processed_set = set(processed_list)
         except Exception as e:
             print(f"[ERROR] Could not read {processed_log}: {e}")
-            # fallback to empty set
 
-    # Step B: Gather images from directory
+    # Scan directory for new images
     if not os.path.exists(directory_path):
         print(f"[ERROR] Directory not found: {directory_path}")
         return
@@ -144,20 +165,18 @@ def process_image_directory(
     all_files = os.listdir(directory_path)
     image_files = [f for f in all_files if f.lower().endswith((".png", ".jpg", ".jpeg"))]
 
-    # Step C: Process each image if not in processed_set
+    # Process only new images
     for filename in image_files:
         full_path = os.path.join(directory_path, filename)
         if full_path in processed_set:
             print(f"[INFO] Skipping already processed: {full_path}")
             continue
 
-        # Not processed, run pipeline
+        # Run OCR & LLM pipeline
         pipeline_ocr_and_llm(full_path, model=model)
 
-        # Add to processed_set
+        # Save processed status
         processed_set.add(full_path)
-
-        # Save updated log
         try:
             with open(processed_log, "w", encoding="utf-8") as f:
                 json.dump(list(processed_set), f, ensure_ascii=False, indent=2)

@@ -1,98 +1,92 @@
 [
     {
       "id": 1,
-      "text": "Hello from Box 1!",
-      "mdFile": "someDoc.md"
+      "text": "The human brain is wired for pattern recognition, but in an era of information overload, this ability can become inefficient. PAU, designed by Anurag Atulya, optimizes cognitive function by structuring knowledge, reducing mental clutter, and enabling users to recall relevant insights instantly.",
+      "mdFile": "brain_efficiency.md"
     },
     {
       "id": 2,
-      "text": "Greetings from Box 2!",
-      "mdFile": "anotherDoc.md"
+      "text": "Cognitive load theory suggests that the brain can only process a limited amount of information at once. PAU acts as an external cognitive assistant, reducing unnecessary processing effort by surfacing relevant data at the right time.",
+      "mdFile": "cognitive_load.md"
     },
     {
       "id": 3,
-      "text": "This is a random phrase fdfdfdfdfdssssssssssssssssssssssssssssssssssssssss  sssssssreraera awwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwffffffffffffffffffffffffffffffffffffffffff.",
-      "mdFile": "randomDoc.md"
+      "text": "The prefrontal cortex, responsible for decision-making and problem-solving, becomes fatigued with too much repetitive thinking. PAU enhances efficiency by automating routine tasks, allowing users to focus their cognitive resources on higher-order thinking.",
+      "mdFile": "prefrontal_cortex.md"
     },
     {
       "id": 4,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Neuroscientific research shows that memory recall is strengthened through association. PAU integrates advanced memory retrieval, connecting concepts based on user context, ensuring that learning is reinforced over time.",
+      "mdFile": "memory_association.md"
     },
     {
       "id": 5,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "The human brain struggles with multitasking, leading to reduced accuracy and increased cognitive fatigue. PAU minimizes context-switching by organizing information intuitively, reducing distractions and improving mental clarity.",
+      "mdFile": "multitasking_brain.md"
     },
     {
       "id": 6,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Anurag Atulya developed PAU as a digital augmentation tool that aligns with how the brain naturally learns and recalls information. Through intelligent search and recall mechanisms, PAU ensures that users can retrieve knowledge effortlessly.",
+      "mdFile": "digital_augmentation.md"
     },
     {
       "id": 7,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Studies show that spaced repetition significantly enhances long-term retention. PAU incorporates this principle by surfacing relevant insights periodically, reinforcing memory without conscious effort from the user.",
+      "mdFile": "spaced_repetition.md"
     },
     {
       "id": 8,
-      "text": "This is a random phrasdddddddddddddddddddddddddddddde.",
-      "mdFile": "randomDoc.md"
+      "text": "Neuroplasticity enables the brain to adapt and optimize itself over time. PAU leverages this by identifying areas where a user needs improvement and suggesting personalized learning paths to accelerate skill development.",
+      "mdFile": "neuroplasticity.md"
     },
     {
       "id": 9,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Mental fatigue is a major barrier to productivity. PAU helps reduce cognitive exhaustion by managing task prioritization, automating repetitive queries, and providing instant access to structured information.",
+      "mdFile": "mental_fatigue.md"
     },
     {
       "id": 10,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "The brain thrives on structured knowledge, yet most digital tools create fragmentation. PAU unifies data into a single, intelligent system, allowing seamless retrieval of ideas and insights in real-time.",
+      "mdFile": "structured_knowledge.md"
     },
     {
       "id": 11,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Research on working memory shows that we can only hold 7±2 pieces of information at a time. PAU counteracts this limitation by acting as an external knowledge repository, allowing users to store and retrieve vast amounts of information effortlessly.",
+      "mdFile": "working_memory.md"
     },
     {
       "id": 12,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Decision fatigue sets in when the brain is forced to make too many choices throughout the day. PAU optimizes workflows by learning user preferences and suggesting the most efficient paths forward.",
+      "mdFile": "decision_fatigue.md"
     },
     {
       "id": 13,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "The best learning happens when knowledge is personalized. PAU tailors insights to each user's learning habits, delivering customized content that aligns with their cognitive strengths and weaknesses.",
+      "mdFile": "personalized_learning.md"
     },
     {
       "id": 14,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Human memory is associative rather than linear. PAU uses AI-driven relational mapping to connect disparate ideas, mimicking how the brain forms networks of understanding.",
+      "mdFile": "associative_memory.md"
     },
     {
       "id": 15,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Research shows that humans forget nearly 50% of new information within an hour if not reinforced. PAU combats this with automated recall mechanisms, ensuring long-term retention of key concepts.",
+      "mdFile": "forgetting_curve.md"
     },
     {
       "id": 16,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "The brain processes visual data 60,000 times faster than text. PAU integrates visual learning aids, such as concept maps and knowledge graphs, to enhance comprehension and retention.",
+      "mdFile": "visual_learning.md"
     },
     {
       "id": 17,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "The Zeigarnik effect states that unfinished tasks occupy mental space until resolved. PAU’s intelligent tracking system ensures that pending tasks remain visible and actionable, reducing cognitive stress.",
+      "mdFile": "zeigarnik_effect.md"
     },
     {
       "id": 18,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
-    },
-    {
-      "id": 19,
-      "text": "This is a random phrase.",
-      "mdFile": "randomDoc.md"
+      "text": "Cognitive efficiency is the key to success in modern knowledge work. PAU, built by Anurag Atulya, is designed to unlock the full potential of the human brain by minimizing friction in knowledge acquisition and application.",
+      "mdFile": "cognitive_efficiency.md"
     }
-  ]
-  
+]
