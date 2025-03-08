@@ -18,7 +18,7 @@ def chunk_text(text: str, chunk_size=500, overlap=50):
         start += (chunk_size - overlap)
     return chunks
 
-EMBED_ENDPOINT = "http://192.168.1.113:1234/v1/embeddings"
+EMBED_ENDPOINT = "http://192.168.31.228:1234/v1/embeddings"
 MODEL_NAME = "text-embedding-nomic-embed-text-v1.5"
 
 def get_embedding(text: str) -> list:
@@ -39,6 +39,26 @@ def get_embedding(text: str) -> list:
 INDEX_PATH = "database/faiss_index.bin"  # Or wherever you like
 
 def build_faiss_index(knowledge_folder="database/knowledge"):
+    # Ensure the directory exists
+    os.makedirs(knowledge_folder, exist_ok=True)    
+    
+    # Create a default file if the directory is empty
+    if not os.listdir(knowledge_folder):
+        default_file_path = os.path.join(knowledge_folder, "seed_knowledge.md")
+        with open(default_file_path, "w", encoding="utf-8") as f:
+            f.write("How humanity needs to become more efficient.")
+    
+    # copies the screen_history knowledge to the knowledge folder
+    screen_history_folder = "brain/knowledge/screen_history"
+    for filename in os.listdir(screen_history_folder):
+        if filename.endswith(".md"):
+            src_path = os.path.join(screen_history_folder, filename)
+            dest_path = os.path.join(knowledge_folder, filename)
+            with open(src_path, "r", encoding="utf-8") as src_file:
+                with open(dest_path, "w", encoding="utf-8") as dest_file:
+                    dest_file.write(src_file.read())
+
+    
     all_embeddings = []
     metadata = []
     for filename in os.listdir(knowledge_folder):

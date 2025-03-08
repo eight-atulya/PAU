@@ -45,7 +45,7 @@ BRANCHES = ["person", "time", "sentiments", "work", "personal", "finance", "heal
 ###############################################################################
 # Inference Endpoints
 ###############################################################################
-EMBED_ENDPOINT = "http://192.168.1.113:1234/v1/embeddings"
+EMBED_ENDPOINT = "http://192.168.31.228:1234/v1/embeddings"
 MODEL_NAME = "text-embedding-nomic-embed-text-v1.5"
 
 def get_embedding(text: str) -> list:
